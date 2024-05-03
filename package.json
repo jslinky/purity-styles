@@ -1,0 +1,30 @@
+{
+  "name": "purity-styles",
+  "type": "module",
+  "version": "0.0.1",
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "dev": "nuxi dev .playground",
+    "build": "nuxt build .playground",
+    "generate": "nuxt generate .playground",
+    "preview": "nuxt preview .playground",
+    "lint": "eslint .",
+    "postinstall": "nuxt prepare .playground"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.1.1",
+    "eslint": "^8.28.0",
+    "nuxt": "^3.6.2",
+    "typescript": "^4.9.3",
+    "sass": "^1.72.0",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss": "^4.0.0-alpha.11",    
+    "open-props": "^1.6.21",
+    "open-props-scss": "^0.7.1",
+    "@nuxt/fonts": "^0.6.1",
+    "@tailwindcss/postcss": "^4.0.0-alpha.11",
+    "@tailwindcss/vite": "^4.0.0-alpha.11",
+    "@vituum/vite-plugin-postcss": "^1.1.0",
+    "postcss-custom-media": "^10.0.4"            
+  }
+}
