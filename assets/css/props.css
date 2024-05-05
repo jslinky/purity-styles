@@ -1,0 +1,169 @@
+:where(html) {
+  --text-size-increment: 1.25;
+  --font-size-base-px: 16;
+  --text-frame-ratio: 2.75;
+  --text-frame-y: 0.725em;
+  --text-frame-x: calc(var(--text-frame-y) * var(--text-frame-ratio));
+  --space-increment: 1.42;
+  --unit-max: 1rem;
+  --unit-min: var(--unit-max)/2;
+  --unit-fluid: 1vi;
+  --unit: clamp(var(--unit-min, 0.25rem), var(--unit-fluid, 1vi), var(--unit-max));
+  --radius: 1rem;
+  --line-height-relative: 1.4em;
+  --line-height-fixed: 0.375rem;
+}
+
+:where(html) {
+  --color-dynamic: inherit;
+  --color-hue: var(--primary-h);
+  --primary-l: var(--color-8-l);
+  --primary-c: var(--color-8-c);
+  --primary-h: var(--op-hue-pink);
+  --secondary-l: var(--color-8-l);
+  --secondary-c: var(--color-8-c);
+  --secondary-h: calc(var(--primary-h) + 120);
+  --accent-l: var(--color-8-l);
+  --accent-c: var(--color-8-c);
+  --accent-h: calc(var(--primary-h) + 240);
+  --color-0-l: 99%;
+  --color-1-l: 95%;
+  --color-2-l: 88%;
+  --color-3-l: 80%;
+  --color-4-l: 74%;
+  --color-5-l: 68%;
+  --color-6-l: 63%;
+  --color-7-l: 58%;
+  --color-8-l: 53%;
+  --color-9-l: 49%;
+  --color-10-l: 42%;
+  --color-11-l: 35%;
+  --color-12-l: 27%;
+  --color-13-l: 20%;
+  --color-14-l: 14%;
+  --color-15-l: 11%;
+  --color-0-c: 0.03;
+  --color-1-c: 0.06;
+  --color-2-c: 0.12;
+  --color-3-c: 0.14;
+  --color-4-c: 0.16;
+  --color-5-c: 0.19;
+  --color-6-c: 0.2;
+  --color-7-c: 0.19;
+  --color-8-c: 0.2;
+  --color-9-c: 0.19;
+  --color-10-c: 0.17;
+  --color-11-c: 0.15;
+  --color-12-c: 0.12;
+  --color-13-c: 0.09;
+  --color-14-c: 0.07;
+  --color-15-c: 0.05;
+}
+
+:where(html) {
+  --font-size-base: calc(var(--font-size-base-px) / 16 * 1rem);
+  --xxs-px: calc(var(--xs-px) / var(--text-size-increment));
+  --xs-px: calc(var(--sm-px) / var(--text-size-increment));
+  --sm-px: calc(var(--font-size-base-px) / var(--text-size-increment));
+  --md-px: var(--font-size-base-px);
+  --lg-px: calc(var(--md-px) * var(--text-size-increment));
+  --xl-px: calc(var(--lg-px) * var(--text-size-increment));
+  --display-xs-px: calc(var(--xl-px) * var(--text-size-increment));
+  --display-sm-px: calc(var(--display-xs-px) * var(--text-size-increment));
+  --display-md-px: calc(var(--display-sm-px) * var(--text-size-increment));
+  --display-lg-px: calc(var(--display-md-px) * var(--text-size-increment));
+  --display-xl-px: calc(var(--display-lg-px) * var(--text-size-increment));
+  --display-2xl-px: calc(var(--display-xl-px) * var(--text-size-increment));
+  --text-xxs: calc(var(--xxs-px) / 16 * 1rem);
+  --text-xs: calc(var(--xs-px) / 16 * 1rem);
+  --text-sm: calc(var(--sm-px) / 16 * 1rem);
+  --text-md: calc(var(--md-px) / 16 * 1rem);
+  --text-lg: calc(var(--lg-px) / 16 * 1rem);
+  --text-xl: calc(var(--xl-px) / 16 * 1rem);
+  --text-display-xs: calc(var(--display-xs-px) / 16 * 1rem);
+  --text-display-sm: calc(var(--display-sm-px) / 16 * 1rem);
+  --text-display-md: calc(var(--display-md-px) / 16 * 1rem);
+  --text-display-lg: calc(var(--display-lg-px) / 16 * 1rem);
+  --text-display-xl: calc(var(--display-xl-px) / 16 * 1rem);
+  --text-display-2xl: calc(var(--display-2xl-px) / 16 * 1rem);
+}
+
+:where(html) {
+  --font-family-sans-system-ui: system-ui, sans-serif;
+  --font-family-sans-humanist: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+  --font-family-sans-geometric-humanist: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+  --font-family-sans-classical-humanist: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
+  --font-family-sans-neo-grotesque: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  --font-family-sans-industrial: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+  --font-family-sans-rounded-sans: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
+  --font-family-serif-transitional: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  --font-family-serif-old-style: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+  --font-family-serif-slab-serif: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+  --font-family-serif-antique: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --font-family-serif-didone: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
+  --font-family-monospace-slab-serif: 'Nimbus Mono PS', 'Courier New', monospace;
+  --font-family-monospace-code: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --font-family-cursive-handwritten: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+}
+
+/* calculations */
+:where(html) {
+  --layout-column-min: 30ch;
+  --layout-gap: var(--spacing-gutter);
+  --layout-grid-min: var(--layout-column-min);
+  --layout-grid-gap: var(--layout-gap);
+  --layout-grid-template-columns: repeat(var(--layout-grid-auto-repeat, auto-fit), minmax(min(100%, var(--layout-grid-min)), 1fr));
+  --flex-grid-min: var(--layout-column-min);
+  --flex-grid-gap: var(--layout-gap);
+}
+
+:where(html) {
+  --heading-base-font-size: 1rem;
+  --heading-base-fs-min: 1rem;
+  --heading-2xl-font-size: var(--text-display-2xl);
+  --heading-2xl-fs-min: var(--text-display-xl);
+  --heading-2xl-fs-fluid: 1.5cqi;
+  --heading-xl-font-size: var(--text-display-xl);
+  --heading-xl-fs-min: var(--text-display-lg);
+  --heading-xl-fs-fluid: 1.5cqi;
+  --heading-lg-font-size: var(--text-display-lg);
+  --heading-lg-fs-min: var(--text-display-md);
+  --heading-lg-fs-fluid: 1.5cqi;
+  --heading-md-font-size: var(--text-display-md);
+  --heading-md-fs-min: var(--text-display-sm);
+  --heading-md-fs-fluid: 1cqi;
+  --heading-sm-font-size: var(--text-display-sm);
+  --heading-sm-fs-min: var(--text-display-xs);
+  --heading-sm-fs-fluid: 1cqi;
+  --heading-xs-font-size: var(--text-display-xs);
+  --heading-xs-fs-min: var(--text-display-xs);
+  --heading-xs-fs-fluid: 1cqi;
+  --heading-xxs-font-size: var(--text-xl);
+  --heading-xxs-fs-min: var(--text-xl);
+  --heading-xxs-fs-fluid: 1cqi;
+  --heading-font-family: var(--font-family-display, inherit);
+}
+
+:where(html) {
+  --space-3xs: calc(var(--space-2xs) / var(--space-increment));
+  --space-2xs: calc(var(--space-xs) / var(--space-increment));
+  --space-xs: calc(var(--space-sm) / var(--space-increment));
+  --space-sm: var(--unit);
+  --space-md: calc(var(--space-sm) * var(--space-increment));
+  --space-lg: calc(var(--space-md) * var(--space-increment));
+  --space-xl: calc(var(--space-lg) * var(--space-increment));
+  --space-2xl: calc(var(--space-xl) * var(--space-increment));
+  --space-3xl: calc(var(--space-2xl) * var(--space-increment));
+  --space-4xl: calc(var(--space-3xl) * var(--space-increment));
+  --space-5xl: calc(var(--space-4xl) * var(--space-increment));
+  --space-6xl: calc(var(--space-5xl) * var(--space-increment));
+}
+
+:where(html) {
+  --max-wrapper-width: 1280px;
+  --wrapper-padding: var(--layout-gap);
+  --wrapper-padding-min: clamp(var(--layout-gap), 2vw, var(--layout-gap) * 2);
+  --wrapper-inline: max(var(--wrapper-padding-min, 1rem), 50vw - var(--wrapper-width) / 2 + var(--wrapper-padding) * 2 / 2);
+  --wrapper-width: calc(var(--max-wrapper-width) + var(--wrapper-padding) * 2);
+  --grid-wrapper-columns: var(--start-col, var(--wrapper-inline)) var(--center-col, 1fr) var(--end-col, var(--wrapper-inline));
+}

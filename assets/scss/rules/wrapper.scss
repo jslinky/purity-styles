@@ -2,16 +2,15 @@
 /* Wrapper rules */
 
 @mixin wrapper-rules() {
-    .wrapper {
-        @include wrapper.default();
-    }
+  .wrapper {
+    @include wrapper.default();
+  }
 
-    .wrapper-grid {
-        @include wrapper.grid();
-    }
-
+  .wrapper-grid {
+    @include wrapper.grid();
+  }
 }
 
-@layer utilities {
-    @include wrapper-rules();
-}
+// @layer utilities {
+@include wrapper-rules();
+// }

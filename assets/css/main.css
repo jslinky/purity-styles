@@ -1,31 +1,10 @@
-@import "tailwindcss";
-@import "./open-props/media";
-@import "./open-props/colors-hsl";
-@import "./open-props/colors-oklch";
-@import "./open-props/borders";
-@import "./open-props/gradients";
-@import "./open-props/masks";
-@import "./rules/reset.css";
-@import "./rules/base.css";
-@import "./props/key-tokens.css";
-@import "./props/colors.css";
-@import "./props/font-size.css";
-@import "./props/font-family.css";
-@import "./props/layout.css";
-@import "./props/headings.css";
-@import "./props/space.css";
-@import "./props/wrapper.css";
-@import "./rules/base.css";
-@import "./rules/headings.css";
-@import "./rules/layout.css";
-@import "./rules/wrapper.css";
-@import "./rules/flow.css";
-@import "./rules/region.css";
-@import "./rules/surface.css";
-@import "./rules/components.css";
 
-@import "./tailwindtheme.css";
-@import "./tailwindutilities.css";
+
+/* @import "tailwindcss"; */
+@import "tailwindcss/theme" layer(purity-tw.theme);
+@import "tailwindcss/preflight" layer(purity-tw.preflight);
+@import "purity.css";
+@import "tailwindcss/utilities" layer(purity-util);
 
 /* @layer base {
   :root {

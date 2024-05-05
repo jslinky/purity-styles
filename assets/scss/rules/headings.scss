@@ -76,11 +76,11 @@
 
 }
 
-@layer components {
+@layer purity.components {
     @include output-headings-base();
 }
 
-@layer utilities {
+@layer purity.util {
     @include output-headings();
     @include output-fluid-headings();    
 }

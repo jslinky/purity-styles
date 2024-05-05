@@ -1,0 +1,8 @@
+@import "./rules/base" layer(purity.base);
+@import "./rules/headings";
+@import "./rules/layout" layer(purity.components);
+@import "./rules/wrapper" layer(purity-util);
+@import "./rules/flow" layer(purity-util);
+@import "./rules/region" layer(purity-util);
+@import "./rules/surface" layer(purity-util);
+@import "./rules/components" layer(purity.components);

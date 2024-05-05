@@ -1,3 +1,10 @@
+@import "./rules/base" layer(purity.base);
+@import "./rules/layout" layer(purity.components);
+@import "./rules/wrapper" layer(purity-util);
+@import "./rules/flow" layer(purity-util);
+@import "./rules/region" layer(purity-util);
+@import "./rules/surface" layer(purity-util);
+@import "./rules/components" layer(purity.components);
 @layer purity.components {
   :is(.heading, h1, h2, h3, h4, h5, h6) {
     --heading-line-height: inherit;

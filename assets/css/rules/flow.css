@@ -1,8 +1,6 @@
-@layer utilities {
-  .flow > * + * {
-    margin-top: var(--flow-space, 1em);
-  }
-  .flow > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
-    --flow-space: var(--spacing-rel-6);
-  }
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+.flow > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
+  --flow-space: var(--spacing-rel-6);
 }
