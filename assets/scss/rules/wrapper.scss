@@ -11,6 +11,6 @@
   }
 }
 
-// @layer utilities {
-@include wrapper-rules();
-// }
+@layer purity-util {
+  @include wrapper-rules();
+}

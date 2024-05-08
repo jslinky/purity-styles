@@ -3,7 +3,7 @@
 @use "../mixins/ultilities/output-props" as *;
 @use "../mixins/ultilities/pick-keys" as *;
 
-// @layer components {
+@layer purity.components {
     // Default grid layout system
     .layout-grid {
         @include output-props(custom, pick-keys(module-variables("props"), column-count layout-grid-min layout-grid-gap layout-grid-template-columns)...);    
@@ -30,4 +30,4 @@
             container: var(--grid-item-container, grid-item) / inline-size;
         }
     }
-// }
+}

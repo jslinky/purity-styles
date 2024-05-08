@@ -41,6 +41,6 @@
   }
 }
 
-// @layer base {
+@layer purity.reset {
     @include output-reset-rules();    
-// }
+}

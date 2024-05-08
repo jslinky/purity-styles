@@ -1,9 +1,9 @@
 @import "./layers.scss";
-@import "./rules/reset" layer(purity.reset);
-@import "./open-props" layer(purity.open-props);
-@import "./props" layer(purity.theme);
+@import "./rules/reset";
+@import "./open-props";
+@import "./props";
 @import "./rules";
 
 
-@import "./tailwindtheme" layer(purity-tw.theme);
-@import "./tailwindutilities" layer(purity-util);
+@import "./tailwindtheme";
+@import "./tailwindutilities";

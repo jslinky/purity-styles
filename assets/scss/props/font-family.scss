@@ -5,10 +5,16 @@
 @use "../props/maps/font-family" as font-family;
 
 // $font-family-includes: 'sans-system-ui' 'serif-transitional' 'monospace-slab-serif';
-$font-family-includes: 'all';
+$font-family-includes: "all";
 
-$font-family-prop-map: if($font-family-includes == 'all', module-variables("font-family"), pick-keys(module-variables("font-family"), $font-family-includes));
+$font-family-prop-map: if(
+  $font-family-includes == "all",
+  module-variables("font-family"),
+  pick-keys(module-variables("font-family"), $font-family-includes)
+);
 
-:where(html) {
-    @include output-props(custom, font-family, $font-family-prop-map... );    
+@layer purity.theme {
+  :where(html) {
+    @include output-props(custom, font-family, $font-family-prop-map...);
+  }
 }

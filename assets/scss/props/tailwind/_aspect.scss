@@ -1,4 +1,6 @@
 $theme-aspect: (    
+    "aspect-*": initial,
+    "aspect-square": unquote('1/1'),
     "aspect-landscape": unquote('4/3'),
     "aspect-portrait": unquote('3/4'),
     "aspect-widescreen": unquote('16/9'),

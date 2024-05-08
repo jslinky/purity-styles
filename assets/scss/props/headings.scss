@@ -2,17 +2,27 @@
 @use "../mixins/ultilities/pick-keys" as *;
 @use "../props/maps/headings" as headings;
 
-:where(html) {
+@layer purity.theme {
+  :where(html) {
     /// Output global props for heading sizes
     @each $key, $val in (module-variables("headings")) {
-        @include output-props(custom, '#{$key}', pick-keys($val, font-size fs-min fs-fluid)...);
+      @include output-props(
+        custom,
+        "#{$key}",
+        pick-keys($val, font-size fs-min fs-fluid)...
+      );
     }
 
     // Font Family Heading
-    @include output-props(custom, 'heading', pick-keys(headings.$heading-base, font-family)...);                
+    @include output-props(
+      custom,
+      "heading",
+      pick-keys(headings.$heading-base, font-family)...
+    );
+  }
 }
 
-// @mixin heading-props() {    
+// @mixin heading-props() {
 
 //     // @include output-props(custom, m.remove-keys(module-variables("size"), use-typo-scale)...);
 

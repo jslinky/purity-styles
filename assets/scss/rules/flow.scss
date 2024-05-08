@@ -1,7 +1,7 @@
 @use "../mixins/rules/flow" as *;
 
-// @layer utilities {
-.flow {
-  @include flow();
+@layer purity-util {
+  .flow {
+    @include flow();
+  }
 }
-// }
