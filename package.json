@@ -19,6 +19,8 @@
     "nuxt": "^3.6.2",
     "typescript": "^4.9.3",
     "sass": "^1.72.0",
+    "primevue": "^3.52.0",
+    "nuxt-primevue": "^0.3.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^4.0.0-alpha.11",    
     "open-props": "^1.6.21",
@@ -27,6 +29,9 @@
     "@tailwindcss/postcss": "^4.0.0-alpha.11",
     "@tailwindcss/vite": "^4.0.0-alpha.11",
     "@vituum/vite-plugin-postcss": "^1.1.0",
-    "postcss-custom-media": "^10.0.4"            
+    "postcss-custom-media": "^10.0.4",
+    "nuxt-icon": "^0.6.10",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0"                
   }
 }
