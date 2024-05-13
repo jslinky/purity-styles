@@ -1577,6 +1577,14 @@
   .hero--full-overlay .hero-content__image img {
     width: 100%;
   }
+  .hero--full-overlay.is-overlay .hero-content__image:before {
+    content: "";
+    display: block;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    border-image: fill 0 linear-gradient(var(--color-dark), #ccc);
+  }
   :where(.hero--full-overlay) .hero-content__text {
     text-align: center;
   }
