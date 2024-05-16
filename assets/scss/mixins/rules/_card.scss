@@ -1,8 +1,8 @@
-@mixin default-rules() {  
+@mixin default-rules() {
     --color-surface-bg: transparent;
-    --card-two-columns: var(--card-left-col, 1fr) var(--card-right-col, 1fr);  
+    --card-two-columns: var(--card-left-col, 1fr) var(--card-right-col, 1fr);
     --card-gutter-stacked: var(--spacing-gutter);
-    grid-template-columns: var(--card-columns, 1fr);    
+    grid-template-columns: var(--card-columns, 1fr);
     background-color: var(--card-bg, var(--color-surface-bg));
     position: relative;
     border: var(--field-border-width, 1px) solid var(--field-border-color);
@@ -16,34 +16,282 @@
     :is(h2, h3):not(.heading) {
         // --headingFontSize: clamp(var(--heading-mSize), 5cqi, var(--heading-lSize));
         text-wrap: balance;
-    } 
+    }
 }
 
 @mixin stacked() {
     --card-columns: 1fr;
     --card-gutter: var(--card-gutter-stacked);
-    grid-auto-flow: row;    
+    grid-auto-flow: row;
 }
 
 @mixin image-full() {
     display: grid;
     grid-template: 1fr / 1fr;
-    height: auto;       
+    height: auto;
     :is(.card-picture, header) {
         height: 100%;
-    }      
+    }
 }
 
 @mixin link() {
     // text-decoration: none;
-    // font-size: inherit;       
+    // font-size: inherit;
     &:focus-visible {
-      --outline-color: transparent;
+        --outline-color: transparent;
     }
     // &:not(.button)::before {
-    &:only-of-type::before {        
-      content: "";
-      position: absolute;
-      inset: 0;
-    }    
+    &:only-of-type::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+    }
+}
+
+@mixin row-justify() {
+    &:is([data-card-row-justify="start"]) {
+        justify-content: start;
+    }
+    &:is([data-card-row-justify="center"]) {
+        justify-content: center;
+    }
+    &:is([data-card-row-justify="end"]) {
+        justify-content: end;
+    }
+    &:is([data-card-row-justify="stretch"]) {
+        justify-content: stretch;
+    }
+    &:is([data-card-row-justify="space-between"]) {
+        justify-content: space-between;
+    }
+    &:is([data-card-row-justify="space-around"]) {
+        justify-content: space-around;
+    }
+    &:is([data-card-row-justify="space-evenly"]) {
+        justify-content: space-evenly;
+    }
+    &:is([data-card-row-justify="safe"]) {
+        justify-content: safe center;
+    }
+    &:is([data-card-row-justify="unsafe"]) {
+        justify-content: unsafe center;
+    }
+}
+
+@mixin column-justify() {
+    &:where([data-card-column-justify]) {
+        .card-body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+    &:is([data-card-column-justify="start"]) {
+        .card-body {
+            justify-content: start;
+        }
+    }
+    &:is([data-card-column-justify="center"]) {
+        .card-body {
+            justify-content: center;
+        }
+    }
+    &:is([data-card-column-justify="end"]) {
+        .card-body {
+            justify-content: end;
+        }
+    }
+    &:is([data-card-column-justify="stretch"]) {
+        .card-body {
+            justify-content: stretch;
+        }
+    }
+    &:is([data-card-column-justify="space-between"]) {
+        .card-body {
+            justify-content: space-between;
+        }
+    }
+    &:is([data-card-column-justify="space-around"]) {
+        .card-body {
+            justify-content: space-around;
+        }
+    }
+    &:is([data-card-column-justify="space-evenly"]) {
+        .card-body {
+            justify-content: space-evenly;
+        }
+    }
+    &:is([data-card-column-justify="safe"]) {
+        .card-body {
+            justify-content: safe center;
+        }
+    }
+    &:is([data-card-column-justify="unsafe"]) {
+        .card-body {
+            justify-content: unsafe center;
+        }
+    }
+
+}
+
+@mixin row-align() {
+    &:is([data-card-row-align="start"]) {
+        align-items: start;
+    }
+    &:is([data-card-row-align="center"]) {
+        align-items: center;
+    }
+    &:is([data-card-row-align="end"]) {
+        align-items: end;
+    }
+    &:is([data-card-row-align="stretch"]) {
+        align-items: stretch;
+    }
+    &:is([data-card-row-align="baseline"]) {
+        align-items: baseline;
+    }
+    &:is([data-card-row-align="first"]) {
+        align-items: first baseline;
+    }
+    &:is([data-card-row-align="last"]) {
+        align-items: last baseline;
+    }
+    &:is([data-card-row-align="safe"]) {
+        align-items: safe center;
+    }
+    &:is([data-card-row-align="unsafe"]) {
+        align-items: unsafe center;
+    }
+    &:is([data-card-row-align="self-start"]) {
+        align-self: start;
+    }
+    &:is([data-card-row-align="self-center"]) {
+        align-self: center;
+    }
+    &:is([data-card-row-align="self-end"]) {
+        align-self: end;
+    }
+    &:is([data-card-row-align="self-stretch"]) {
+        align-self: stretch;
+    }
+    &:is([data-card-row-align="self-baseline"]) {
+        align-self: baseline;
+    }
+    &:is([data-card-row-align="self-first"]) {
+        align-self: first baseline;
+    }
+    &:is([data-card-row-align="self-last"]) {
+        align-self: last baseline;
+    }
+    &:is([data-card-row-align="self-safe"]) {
+        align-self: safe center;
+    }
+    &:is([data-card-row-align="self-unsafe"]) {
+        align-self: unsafe center;
+    }
+    &:is([data-card-row-align="self-auto"]) {
+        align-self: auto;
+    }
+    &:is([data-card-row-align="self-normal"]) {
+        align-self: normal;
+    }
+
+}
+
+@mixin column-align() {
+    &:is([data-card-column-align="start"]) {
+        align-items: start;
+    }
+    &:is([data-card-column-align="center"]) {
+        align-items: center;
+    }
+    &:is([data-card-column-align="end"]) {
+        align-items: end;
+    }
+    &:is([data-card-column-align="stretch"]) {
+        align-items: stretch;
+    }
+    &:is([data-card-column-align="baseline"]) {
+        align-items: baseline;
+    }
+    &:is([data-card-column-align="first"]) {
+        align-items: first baseline;
+    }
+    &:is([data-card-column-align="last"]) {
+        align-items: last baseline;
+    }
+    &:is([data-card-column-align="safe"]) {
+        align-items: safe center;
+    }
+    &:is([data-card-column-align="unsafe"]) {
+        align-items: unsafe center;
+    }
+    &:is([data-card-column-align="self-start"]) {
+        align-self: start;
+    }
+    &:is([data-card-column-align="self-center"]) {
+        align-self: center;
+    }
+    &:is([data-card-column-align="self-end"]) {
+        align-self: end;
+    }
+    &:is([data-card-column-align="self-stretch"]) {
+        align-self: stretch;
+    }
+    &:is([data-card-column-align="self-baseline"]) {
+        align-self: baseline;
+    }
+    &:is([data-card-column-align="self-first"]) {
+        align-self: first baseline;
+    }
+    &:is([data-card-column-align="self-last"]) {
+        align-self: last baseline;
+    }
+    &:is([data-card-column-align="self-safe"]) {
+        align-self: safe center;
+    }
+    :is([data-card-column-align="self-unsafe"]) {
+        align-self: unsafe center;
+    }
+    :is([data-card-column-align="self-auto"]) {
+        align-self: auto;
+    }
+    :is([data-card-column-align="self-normal"]) {
+        align-self: normal;
+    }
+}
+
+@mixin row-text-align() {
+    &:is([data-card-row-text-align="start"]) {
+        .card-body {
+            text-align: start;
+        }        
+    }
+    &:is([data-card-row-text-align="center"]) {
+        .card-body {
+            text-align: center;
+        }
+    }
+    &:is([data-card-row-text-align="end"]) {
+        .card-body {
+            text-align: end;
+        }
+    }
+}
+
+@mixin column-text-align() {
+    &:is([data-card-column-text-align="start"]) {
+        .card-body {
+            text-align: start;
+        }
+    }
+    &:is([data-card-column-text-align="center"]) {
+        .card-body {
+            text-align: center;
+        }
+    }
+    &:is([data-card-column-text-align="end"]) {
+        .card-body {
+            text-align: end;
+        }
+    }
 }

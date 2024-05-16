@@ -22,6 +22,9 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 @layer purity.components {
   :where(#{$card-component-selectors}) {
     @include card.default-rules();
+    @include card.row-justify();
+    @include card.row-align();
+    @include card.row-text-align();
     &.image-full {
       @include card.image-full();
     }
@@ -31,6 +34,18 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     &[data-card-clip="true"] {
       &:is([data-surface-theme], [class*="bg-"]) {
         overflow: clip;
+      }
+    }
+    &:not([class*="card--side"]) {
+      grid-auto-flow: column;
+      align-items: flex-start;
+      justify-content: start;
+      aspect-ratio: unset;
+
+      &:has(#{$card-picture-selectors}) {
+        grid-auto-flow: row;
+        grid-auto-rows: max-content;
+        // grid-template-columns: 1fr;
       }
     }
   }
@@ -43,7 +58,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
   :where(#{$card-subtitle-selectors}) {
     @include h.base();
-    --flow-space: var(--spacing-rel-1_5);
+    --flow-space: var(--spacing-rel-6);
     display: block;
   }
 
@@ -54,7 +69,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     justify-content: center;
     &[data-card-picture-aspect-column="auto"] {
       --card-aspect: auto;
-    }    
+    }
     &[data-card-picture-aspect-column="landscape"] {
       --card-aspect: var(--aspect-landscape);
     }
@@ -79,12 +94,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
   }
 
-  :where(
-      #{$card-body-selectors},
-      #{$card-caption-selectors},
-      #{$card-content-selectors},
-      #{$card-footer-selectors}
-    ) {
+  :where(#{$card-body-selectors}, #{$card-caption-selectors}, #{$card-content-selectors}, #{$card-footer-selectors}) {
     @include flow();
   }
 
@@ -93,11 +103,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     display: block;
   }
 
-  :where(#{$card-component-selectors}):is(
-      [class*="bg-"],
-      [data-surface-theme],
-      [class*="--color-surface-bg"]
-    ) {
+  :where(#{$card-component-selectors}):is([class*="bg-"], [data-surface-theme], [class*="--color-surface-bg"]) {
     --card-body-padding: var(--spacing-card-component);
     &:focus-within {
       outline: 3px solid var(--color-surface-bg-interact);
@@ -105,15 +111,10 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
   }
 
-  :where(#{$card-component-selectors}):is(
-      [class*="bg-"],
-      [data-surface-theme],
-      [class*="--color-surface-bg"]
-    ):is(.card--stacked) {
-    &:has(
-        :where(#{$card-picture-selectors}:not(.hidden, [class*="order-"]))
-          + :where(#{$card-body-selectors})
-      )
+  :where(#{$card-component-selectors}):is([class*="bg-"], [data-surface-theme], [class*="--color-surface-bg"]):is(
+      .card--stacked
+    ) {
+    &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"])) + :where(#{$card-body-selectors}))
       :where(#{$card-body-selectors}) {
       padding-block-start: 0;
       // background:red;
@@ -121,13 +122,8 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
   }
 
   @container (inline-size <= 80ch) {
-    :where(#{$card-component-selectors}):is(
-        [class*="bg-"],
-        [data-surface-theme],
-        [class*="--color-surface-bg"]
-      ) {
-      &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"])))
-        :where(#{$card-body-selectors}) {
+    :where(#{$card-component-selectors}):is([class*="bg-"], [data-surface-theme], [class*="--color-surface-bg"]) {
+      &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"]))) :where(#{$card-body-selectors}) {
         padding-block-start: 0;
         // background:red;
       }
@@ -148,12 +144,15 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
       --card-gutter: var(--card-gutter-cols-gutter, var(--spacing-gutter-xl));
       aspect-ratio: 4/3;
       max-width: 100%;
+      @include card.column-justify();
+      @include card.column-align();
+      @include card.column-text-align();
     }
     :where(#{$card-picture-selectors}) {
       --card-aspect: var(--card-aspect-cols, auto);
       &[data-card-picture-aspect-column="auto"] {
         --card-aspect-cols: auto;
-      }            
+      }
       &[data-card-picture-aspect-column="landscape"] {
         --card-aspect-cols: var(--aspect-landscape);
       }
@@ -177,20 +176,20 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
   // @container grid-item (inline-size > 35ch) {
   @container (inline-size > 35ch) {
-    :where(#{$card-component-selectors}) {
-      &:not([class*="card--side"]) {
-        grid-auto-flow: column;
-        align-items: flex-start;
-        justify-content: start;
-        aspect-ratio: unset;
+    // :where(#{$card-component-selectors}) {
+    //   &:not([class*="card--side"]) {
+    //     grid-auto-flow: column;
+    //     align-items: flex-start;
+    //     justify-content: start;
+    //     aspect-ratio: unset;
 
-        &:has(#{$card-picture-selectors}) {
-          grid-auto-flow: row;
-          grid-auto-rows: max-content;
-          // grid-template-columns: 1fr;
-        }
-      }
-    }
+    //     &:has(#{$card-picture-selectors}) {
+    //       grid-auto-flow: row;
+    //       grid-auto-rows: max-content;
+    //       // grid-template-columns: 1fr;
+    //     }
+    //   }
+    // }
 
     :where(#{$card-picture-selectors}) {
       order: -1;
@@ -202,9 +201,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
   // @container grid-item (inline-size > 80ch) {
   @container (inline-size > 80ch) {
-    :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        #{$card-picture-selectors}
-      ) {
+    :where(#{$card-component-selectors}):not([class*="card--side"]):has(#{$card-picture-selectors}) {
       --card-columns: var(--card-two-columns);
       --card-gap: calc(var(--card-p) * 2);
       // display: flex;
@@ -213,8 +210,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        :is(#{$card-picture-selectors}):first-child
-          + :is(#{$card-body-selectors})
+        :is(#{$card-picture-selectors}):first-child + :is(#{$card-body-selectors})
       ) {
       --card-left-col: 0.6fr;
       --card-right-col: 0.4fr;
@@ -222,9 +218,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        :is(#{$card-picture-selectors}):is(
-            [data-card-picture-aspect-column="sqaure"]
-          ):first-child
+        :is(#{$card-picture-selectors}):is([data-card-picture-aspect-column="square"]):first-child
           + :is(#{$card-body-selectors})
       ) {
       --card-left-col: 0.5fr;
@@ -232,8 +226,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        :is(#{$card-body-selectors}):first-child
-          + :is(#{$card-picture-selectors})
+        :is(#{$card-body-selectors}):first-child + :is(#{$card-picture-selectors})
       ) {
       --card-left-col: 0.4fr;
       --card-right-col: 0.6fr;
@@ -242,9 +235,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
         :is(#{$card-body-selectors}):first-child
-          + :is(#{$card-picture-selectors}):is(
-            [data-card-picture-aspect-column="sqaure"]
-          )
+          + :is(#{$card-picture-selectors}):is([data-card-picture-aspect-column="square"])
       ) {
       --card-left-col: 0.5fr;
       --card-right-col: 0.5fr;

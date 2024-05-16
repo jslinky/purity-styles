@@ -1325,6 +1325,102 @@
   :where(.card, .p-card) :is(h2, h3):not(.heading) {
     text-wrap: balance;
   }
+  :where(.card, .p-card):is([data-card-row-justify=start]) {
+    justify-content: start;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=center]) {
+    justify-content: center;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=end]) {
+    justify-content: end;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=stretch]) {
+    justify-content: stretch;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=space-between]) {
+    justify-content: space-between;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=space-around]) {
+    justify-content: space-around;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=space-evenly]) {
+    justify-content: space-evenly;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=safe]) {
+    justify-content: safe center;
+  }
+  :where(.card, .p-card):is([data-card-row-justify=unsafe]) {
+    justify-content: unsafe center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=start]) {
+    align-items: start;
+  }
+  :where(.card, .p-card):is([data-card-row-align=center]) {
+    align-items: center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=end]) {
+    align-items: end;
+  }
+  :where(.card, .p-card):is([data-card-row-align=stretch]) {
+    align-items: stretch;
+  }
+  :where(.card, .p-card):is([data-card-row-align=baseline]) {
+    align-items: baseline;
+  }
+  :where(.card, .p-card):is([data-card-row-align=first]) {
+    align-items: first baseline;
+  }
+  :where(.card, .p-card):is([data-card-row-align=last]) {
+    align-items: last baseline;
+  }
+  :where(.card, .p-card):is([data-card-row-align=safe]) {
+    align-items: safe center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=unsafe]) {
+    align-items: unsafe center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-start]) {
+    align-self: start;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-center]) {
+    align-self: center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-end]) {
+    align-self: end;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-stretch]) {
+    align-self: stretch;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-baseline]) {
+    align-self: baseline;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-first]) {
+    align-self: first baseline;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-last]) {
+    align-self: last baseline;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-safe]) {
+    align-self: safe center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-unsafe]) {
+    align-self: unsafe center;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-auto]) {
+    align-self: auto;
+  }
+  :where(.card, .p-card):is([data-card-row-align=self-normal]) {
+    align-self: normal;
+  }
+  :where(.card, .p-card):is([data-card-row-text-align=start]) .card-body {
+    text-align: start;
+  }
+  :where(.card, .p-card):is([data-card-row-text-align=center]) .card-body {
+    text-align: center;
+  }
+  :where(.card, .p-card):is([data-card-row-text-align=end]) .card-body {
+    text-align: end;
+  }
   :where(.card, .p-card).image-full {
     display: grid;
     grid-template: 1fr/1fr;
@@ -1343,6 +1439,16 @@
   }
   :where(.card, .p-card)[data-card-clip=true]:is([data-surface-theme], [class*=bg-]) {
     overflow: clip;
+  }
+  :where(.card, .p-card):not([class*=card--side]) {
+    grid-auto-flow: column;
+    align-items: flex-start;
+    justify-content: start;
+    aspect-ratio: unset;
+  }
+  :where(.card, .p-card):not([class*=card--side]):has(.card-picture, .p-card-header) {
+    grid-auto-flow: row;
+    grid-auto-rows: max-content;
   }
   :where(.card-title, .p-card-title) {
     --heading-line-height: inherit;
@@ -1381,7 +1487,7 @@
     letter-spacing: var(--heading-letter-spacing, normal);
     line-height: var(--heading-line-height);
     text-wrap: balance;
-    --flow-space: var(--spacing-rel-1_5);
+    --flow-space: var(--spacing-rel-6);
     display: block;
   }
   :where(.card-subtitle, .p-card-subtitle).fluid {
@@ -1418,42 +1524,28 @@
     height: 100%;
     object-fit: cover;
   }
-  :where(.card-body, .p-card-body,
-  .card-caption, .p-card-caption,
-  .card-content, .p-card-content,
-  .card-footer, .p-card-footer) > * + * {
+  :where(.card-body, .p-card-body, .card-caption, .p-card-caption, .card-content, .p-card-content, .card-footer, .p-card-footer) > * + * {
     margin-block-start: var(--flow-space, 1em);
   }
-  :where(.card-body, .p-card-body,
-  .card-caption, .p-card-caption,
-  .card-content, .p-card-content,
-  .card-footer, .p-card-footer) > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
+  :where(.card-body, .p-card-body, .card-caption, .p-card-caption, .card-content, .p-card-content, .card-footer, .p-card-footer) > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
     --flow-space: var(--spacing-rel-6);
   }
   :where(.card-body, .p-card-body) {
     padding: var(--card-body-padding, 0);
     display: block;
   }
-  :where(.card, .p-card):is([class*=bg-],
-  [data-surface-theme],
-  [class*="--color-surface-bg"]) {
+  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]) {
     --card-body-padding: var(--spacing-card-component);
   }
-  :where(.card, .p-card):is([class*=bg-],
-  [data-surface-theme],
-  [class*="--color-surface-bg"]):focus-within {
+  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]):focus-within {
     outline: 3px solid var(--color-surface-bg-interact);
     outline-offset: -6px;
   }
-  :where(.card, .p-card):is([class*=bg-],
-  [data-surface-theme],
-  [class*="--color-surface-bg"]):is(.card--stacked):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-])) + :where(.card-body, .p-card-body)) :where(.card-body, .p-card-body) {
+  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]):is(.card--stacked):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-])) + :where(.card-body, .p-card-body)) :where(.card-body, .p-card-body) {
     padding-block-start: 0;
   }
   @container (inline-size <= 80ch) {
-    :where(.card, .p-card):is([class*=bg-],
-    [data-surface-theme],
-    [class*="--color-surface-bg"]):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-]))) :where(.card-body, .p-card-body) {
+    :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-]))) :where(.card-body, .p-card-body) {
       padding-block-start: 0;
     }
     :where(.card, .p-card):not([class*=card--side]):has(.card-picture, .p-card-header) {
@@ -1465,6 +1557,106 @@
       --card-gutter: var(--card-gutter-cols-gutter, var(--spacing-gutter-xl));
       aspect-ratio: 4/3;
       max-width: 100%;
+    }
+    :where(.card, .p-card):where([data-card-column-justify]) .card-body {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=start]) .card-body {
+      justify-content: start;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=center]) .card-body {
+      justify-content: center;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=end]) .card-body {
+      justify-content: end;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=stretch]) .card-body {
+      justify-content: stretch;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=space-between]) .card-body {
+      justify-content: space-between;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=space-around]) .card-body {
+      justify-content: space-around;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=space-evenly]) .card-body {
+      justify-content: space-evenly;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=safe]) .card-body {
+      justify-content: safe center;
+    }
+    :where(.card, .p-card):is([data-card-column-justify=unsafe]) .card-body {
+      justify-content: unsafe center;
+    }
+    :where(.card, .p-card):is([data-card-column-align=start]) {
+      align-items: start;
+    }
+    :where(.card, .p-card):is([data-card-column-align=center]) {
+      align-items: center;
+    }
+    :where(.card, .p-card):is([data-card-column-align=end]) {
+      align-items: end;
+    }
+    :where(.card, .p-card):is([data-card-column-align=stretch]) {
+      align-items: stretch;
+    }
+    :where(.card, .p-card):is([data-card-column-align=baseline]) {
+      align-items: baseline;
+    }
+    :where(.card, .p-card):is([data-card-column-align=first]) {
+      align-items: first baseline;
+    }
+    :where(.card, .p-card):is([data-card-column-align=last]) {
+      align-items: last baseline;
+    }
+    :where(.card, .p-card):is([data-card-column-align=safe]) {
+      align-items: safe center;
+    }
+    :where(.card, .p-card):is([data-card-column-align=unsafe]) {
+      align-items: unsafe center;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-start]) {
+      align-self: start;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-center]) {
+      align-self: center;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-end]) {
+      align-self: end;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-stretch]) {
+      align-self: stretch;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-baseline]) {
+      align-self: baseline;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-first]) {
+      align-self: first baseline;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-last]) {
+      align-self: last baseline;
+    }
+    :where(.card, .p-card):is([data-card-column-align=self-safe]) {
+      align-self: safe center;
+    }
+    :where(.card, .p-card) :is([data-card-column-align=self-unsafe]) {
+      align-self: unsafe center;
+    }
+    :where(.card, .p-card) :is([data-card-column-align=self-auto]) {
+      align-self: auto;
+    }
+    :where(.card, .p-card) :is([data-card-column-align=self-normal]) {
+      align-self: normal;
+    }
+    :where(.card, .p-card):is([data-card-column-text-align=start]) .card-body {
+      text-align: start;
+    }
+    :where(.card, .p-card):is([data-card-column-text-align=center]) .card-body {
+      text-align: center;
+    }
+    :where(.card, .p-card):is([data-card-column-text-align=end]) .card-body {
+      text-align: end;
     }
     :where(.card-picture, .p-card-header) {
       --card-aspect: var(--card-aspect-cols, auto);
@@ -1492,16 +1684,6 @@
     }
   }
   @container (inline-size > 35ch) {
-    :where(.card, .p-card):not([class*=card--side]) {
-      grid-auto-flow: column;
-      align-items: flex-start;
-      justify-content: start;
-      aspect-ratio: unset;
-    }
-    :where(.card, .p-card):not([class*=card--side]):has(.card-picture, .p-card-header) {
-      grid-auto-flow: row;
-      grid-auto-rows: max-content;
-    }
     :where(.card-picture, .p-card-header) {
       order: -1;
     }
@@ -1519,7 +1701,7 @@
       --card-left-col: 0.6fr;
       --card-right-col: 0.4fr;
     }
-    :where(.card, .p-card):not([class*=card--side]):has(:is(.card-picture, .p-card-header):is([data-card-picture-aspect-column=sqaure]):first-child + :is(.card-body, .p-card-body)) {
+    :where(.card, .p-card):not([class*=card--side]):has(:is(.card-picture, .p-card-header):is([data-card-picture-aspect-column=square]):first-child + :is(.card-body, .p-card-body)) {
       --card-left-col: 0.5fr;
       --card-right-col: 0.5fr;
     }
@@ -1527,7 +1709,7 @@
       --card-left-col: 0.4fr;
       --card-right-col: 0.6fr;
     }
-    :where(.card, .p-card):not([class*=card--side]):has(:is(.card-body, .p-card-body):first-child + :is(.card-picture, .p-card-header):is([data-card-picture-aspect-column=sqaure])) {
+    :where(.card, .p-card):not([class*=card--side]):has(:is(.card-body, .p-card-body):first-child + :is(.card-picture, .p-card-header):is([data-card-picture-aspect-column=square])) {
       --card-left-col: 0.5fr;
       --card-right-col: 0.5fr;
     }
