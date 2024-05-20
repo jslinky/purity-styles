@@ -41,6 +41,9 @@
         color: var(--button-color-hover);
         background-color: var(--button-bg-hover);
     }  
+    &:has(.icon) {
+        gap: var(--button-icon-gap, .5em);
+    }
 }
 
 @mixin button-outline() {

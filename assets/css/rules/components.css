@@ -243,6 +243,9 @@
     color: var(--button-color-hover);
     background-color: var(--button-bg-hover);
   }
+  :where(.btn, button):has(.icon) {
+    gap: var(--button-icon-gap, 0.5em);
+  }
   .btn-neutral {
     --button-bg: var(--color-grey-12);
     --button-color: var(--color-grey-2);
@@ -494,7 +497,6 @@
   }
   :where(.card-picture, .p-card-header) {
     align-self: stretch;
-    aspect-ratio: var(--card-aspect, var(--aspect-landscape));
     display: flex;
     justify-content: center;
   }
@@ -520,6 +522,7 @@
     --card-aspect: var(--aspect-golden);
   }
   :where(.card-picture, .p-card-header) img {
+    aspect-ratio: var(--card-aspect, var(--aspect-landscape));
     height: 100%;
     object-fit: cover;
   }
@@ -560,6 +563,9 @@
     :where(.card, .p-card):where([data-card-column-justify]) .card-body {
       display: flex;
       flex-wrap: wrap;
+    }
+    :where(.card, .p-card):where([data-card-column-justify]) .card-body > :is(.card-caption, .card-content, .card-footer) {
+      flex: 1 1 100%;
     }
     :where(.card, .p-card):is([data-card-column-justify=start]) .card-body {
       justify-content: start;
@@ -721,6 +727,9 @@
     --card-gutter: var(--card-gutter-stacked);
     grid-auto-flow: row;
   }
+  :where(.card-footer, .p-card-footer) {
+    max-width: max-content;
+  }
 }
 @layer purity.components {
   :where(.c-header-main).fixed + main .hero-content__text {
@@ -857,7 +866,7 @@
     align-items: flex-start;
     gap: var(--spacing-gutter-sm);
   }
-  .quote img {
+  .quote img.quote__avatar {
     aspect-ratio: 1/1;
     border-radius: 50%;
     width: clamp(4rem, 30%, 6rem);

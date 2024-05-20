@@ -20,7 +20,7 @@
     gap: var(--spacing-gutter-sm);
   }
 
-  .quote img {
+  .quote img.quote__avatar {
     aspect-ratio: 1/1;
     border-radius: 50%;
     width: clamp(4rem, 30%, 6rem);

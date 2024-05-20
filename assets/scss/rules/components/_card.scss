@@ -64,7 +64,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
   :where(#{$card-picture-selectors}) {
     align-self: stretch;
-    aspect-ratio: var(--card-aspect, var(--aspect-landscape));
+    // aspect-ratio: var(--card-aspect, var(--aspect-landscape));
     display: flex;
     justify-content: center;
     &[data-card-picture-aspect-column="auto"] {
@@ -89,6 +89,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
       --card-aspect: var(--aspect-golden);
     }
     img {
+      aspect-ratio: var(--card-aspect, var(--aspect-landscape));
       height: 100%;
       object-fit: cover;
     }
@@ -251,4 +252,10 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
       @include card.stacked();
     }
   }
+
+  :where(#{$card-footer-selectors}) {
+    max-width: max-content;
+  }
+
+
 }

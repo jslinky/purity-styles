@@ -83,6 +83,9 @@
         .card-body {
             display: flex;
             flex-wrap: wrap;
+            > :is(.card-caption, .card-content, .card-footer) {
+                flex: 1 1 100%;
+            }
         }
     }
     &:is([data-card-column-justify="start"]) {
