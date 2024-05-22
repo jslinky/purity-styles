@@ -1,3 +1,5 @@
+@use "../props/maps/colors" as colors;
+
 @mixin surface-theme($type) {
   &[data-surface-theme="#{$type}"] {
     --color-surface-bg: var(--color-#{$type});
@@ -42,17 +44,21 @@
         background-color: var(--color-surface-bg-interact);
       }
     }
-    @include surface-theme(light);
-    @include surface-theme(dark);
-    @include surface-theme(eggshell);
-    @include surface-theme(primary);
-    @include surface-theme(primary-light);
-    @include surface-theme(primary-dark);
-    @include surface-theme(secondary);
-    @include surface-theme(secondary-light);
-    @include surface-theme(secondary-dark);
-    @include surface-theme(accent);
-    @include surface-theme(accent-light);
-    @include surface-theme(accent-dark);
+
+    @each $color in colors.$color-key-map {
+      @include surface-theme($color);
+    }
+    // @include surface-theme(light);
+    // @include surface-theme(dark);
+    // @include surface-theme(eggshell);
+    // @include surface-theme(primary);
+    // @include surface-theme(primary-light);
+    // @include surface-theme(primary-dark);
+    // @include surface-theme(secondary);
+    // @include surface-theme(secondary-light);
+    // @include surface-theme(secondary-dark);
+    // @include surface-theme(accent);
+    // @include surface-theme(accent-light);
+    // @include surface-theme(accent-dark);
   }
 }

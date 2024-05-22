@@ -423,13 +423,98 @@
   :where(.card, .p-card):is([data-card-row-text-align=end]) .card-body {
     text-align: end;
   }
-  :where(.card, .p-card).image-full {
+  :where(.card, .p-card)[data-card-overlay-image=true] {
     display: grid;
     grid-template: 1fr/1fr;
     height: auto;
   }
-  :where(.card, .p-card).image-full :is(.card-picture, header) {
+  :where(.card, .p-card)[data-card-overlay-image=true] :is(.card-picture, .p-card-header, .card-body, .p-card-body) {
     height: 100%;
+    grid-column: 1/1;
+    grid-row: 1/1;
+    position: relative;
+  }
+  :where(.card, .p-card)[data-card-overlay-image=true] .card-body, :where(.card, .p-card)[data-card-overlay-image=true] .p-card-body {
+    z-index: 1;
+    display: grid;
+    justify-content: flex-start;
+    align-content: flex-end;
+  }
+  :where(.card, .p-card)[data-card-overlay-image=true] .card-body .card-title, :where(.card, .p-card)[data-card-overlay-image=true] .p-card-body .card-title {
+    container-type: normal;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=light] {
+    --card-backdrop-color-from-color: var(--color-light);
+    --card-backdrop-color-to-color: var(--color-light);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=dark] {
+    --card-backdrop-color-from-color: var(--color-dark);
+    --card-backdrop-color-to-color: var(--color-dark);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=eggshell] {
+    --card-backdrop-color-from-color: var(--color-eggshell);
+    --card-backdrop-color-to-color: var(--color-eggshell);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=primary] {
+    --card-backdrop-color-from-color: var(--color-primary);
+    --card-backdrop-color-to-color: var(--color-primary);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=primary-light] {
+    --card-backdrop-color-from-color: var(--color-primary-light);
+    --card-backdrop-color-to-color: var(--color-primary-light);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=primary-dark] {
+    --card-backdrop-color-from-color: var(--color-primary-dark);
+    --card-backdrop-color-to-color: var(--color-primary-dark);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=secondary] {
+    --card-backdrop-color-from-color: var(--color-secondary);
+    --card-backdrop-color-to-color: var(--color-secondary);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=secondary-light] {
+    --card-backdrop-color-from-color: var(--color-secondary-light);
+    --card-backdrop-color-to-color: var(--color-secondary-light);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=secondary-dark] {
+    --card-backdrop-color-from-color: var(--color-secondary-dark);
+    --card-backdrop-color-to-color: var(--color-secondary-dark);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme="accent accent-light"] {
+    --card-backdrop-color-from-color: var(--color-accent accent-light);
+    --card-backdrop-color-to-color: var(--color-accent accent-light);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-surface-theme=accent-dark] {
+    --card-backdrop-color-from-color: var(--color-accent-dark);
+    --card-backdrop-color-to-color: var(--color-accent-dark);
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop] .card-body, :where(.card, .p-card)[data-card-overlay-backdrop] .p-card-body {
+    isolation: isolate;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop] .card-body:before, :where(.card, .p-card)[data-card-overlay-backdrop] .p-card-body:before {
+    content: "";
+    display: block;
+    width: 100%;
+    inset: 0;
+    position: absolute;
+    height: 100%;
+    border-image: var(--card-backdrop-fill, fill 0 linear-gradient(var(--card-backdrop-direction, in oklch to top), var(--card-backdrop-color-stop-from, oklch(from var(--card-backdrop-color-from-color, var(--color-light)) l c h/var(--card-backdrop-color-stop-from-opacity, 0.9)) 0%), var(--card-backdrop-color-stop-to, oklch(from var(--card-backdrop-color-to-color, var(--color-light)) l c h/var(--card-backdrop-color-stop-to-opacity, 0.15)) 100%)));
+    z-index: -1;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-row=linear-to-top] {
+    --card-backdrop-direction: in oklch to top;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-row=linear-to-right] {
+    --card-backdrop-direction: in oklch to right;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-row=linear-to-bottom] {
+    --card-backdrop-direction: in oklch to bottom;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-row=linear-to-left] {
+    --card-backdrop-direction: in oklch to left;
+  }
+  :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-row=uniform] {
+    --card-backdrop-color-stop-from-opacity: 0.45;
+    --card-backdrop-color-stop-to-opacity: 0.45;
   }
   :where(.card, .p-card) :is(.btn, button):focus-visible {
     --outline-color: transparent;
@@ -439,7 +524,7 @@
     position: absolute;
     inset: 0;
   }
-  :where(.card, .p-card)[data-card-clip=true]:is([data-surface-theme], [class*=bg-]) {
+  :where(.card, .p-card)[data-card-clip=true]:is([data-surface-theme], [class*=bg-], [data-card-overlay-image]) {
     overflow: clip;
   }
   :where(.card, .p-card):not([class*=card--side]) {
@@ -500,31 +585,49 @@
     display: flex;
     justify-content: center;
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=auto] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=auto] {
     --card-aspect: auto;
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=landscape] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=landscape] {
     --card-aspect: var(--aspect-landscape);
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=square] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=square] {
     --card-aspect: var(--aspect-square);
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=portrait] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=portrait] {
     --card-aspect: var(--aspect-portrait);
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=widescreen] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=widescreen] {
     --card-aspect: var(--aspect-widescreen);
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=ultrawide] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=ultrawide] {
     --card-aspect: var(--aspect-ultrawide);
   }
-  :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=golden] {
+  :where(.card-picture, .p-card-header)[data-card-picture-aspect-row=golden] {
     --card-aspect: var(--aspect-golden);
+  }
+  :where(.card-picture, .p-card-header):is([data-card-picture-mask-row], [data-card-picture-mask-column]) {
+    mask-image: var(--card-image-mask, none);
+  }
+  :where(.card-picture, .p-card-header)[data-card-picture-mask-row=linear-to-top] {
+    --card-image-mask: linear-gradient(to top, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+  }
+  :where(.card-picture, .p-card-header)[data-card-picture-mask-row=linear-to-right] {
+    --card-image-mask: linear-gradient(to right, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+  }
+  :where(.card-picture, .p-card-header)[data-card-picture-mask-row=linear-to-bottom] {
+    --card-image-mask: linear-gradient(to bottom, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+  }
+  :where(.card-picture, .p-card-header)[data-card-picture-mask-row=linear-to-left] {
+    --card-image-mask: linear-gradient(to left, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
   }
   :where(.card-picture, .p-card-header) img {
     aspect-ratio: var(--card-aspect, var(--aspect-landscape));
     height: 100%;
     object-fit: cover;
+  }
+  :where(.card-picture, .p-card-header):empty {
+    display: none;
   }
   :where(.card-body, .p-card-body, .card-caption, .p-card-caption, .card-content, .p-card-content, .card-footer, .p-card-footer) > * + * {
     margin-block-start: var(--flow-space, 1em);
@@ -536,10 +639,10 @@
     padding: var(--card-body-padding, 0);
     display: block;
   }
-  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]) {
+  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"], [data-card-overlay-image]) {
     --card-body-padding: var(--spacing-card-component);
   }
-  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]):focus-within {
+  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"], [data-card-overlay-image]):focus-within {
     outline: 3px solid var(--color-surface-bg-interact);
     outline-offset: -6px;
   }
@@ -553,11 +656,13 @@
     :where(.card, .p-card):not([class*=card--side]):has(.card-picture, .p-card-header) {
       grid-auto-rows: max-content;
     }
+    :where(.card, .p-card):is([data-card-reverse-order-row=true]) .card-picture, :where(.card, .p-card):is([data-card-reverse-order-row=true]) .p-card-header {
+      order: 2;
+    }
   }
   @container (inline-size > 80ch) {
     :where(.card, .p-card) {
       --card-gutter: var(--card-gutter-cols-gutter, var(--spacing-gutter-xl));
-      aspect-ratio: 4/3;
       max-width: 100%;
     }
     :where(.card, .p-card):where([data-card-column-justify]) .card-body {
@@ -663,7 +768,23 @@
     :where(.card, .p-card):is([data-card-column-text-align=end]) .card-body {
       text-align: end;
     }
-    :where(.card-picture, .p-card-header) {
+    :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-column=linear-to-top] {
+      --card-backdrop-direction: in oklch to top;
+    }
+    :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-column=linear-to-right] {
+      --card-backdrop-direction: in oklch to right;
+    }
+    :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-column=linear-to-bottom] {
+      --card-backdrop-direction: in oklch to bottom;
+    }
+    :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-column=linear-to-left] {
+      --card-backdrop-direction: in oklch to left;
+    }
+    :where(.card, .p-card)[data-card-overlay-backdrop][data-card-overlay-backdrop-direction-column=uniform] {
+      --card-backdrop-color-stop-from-opacity: 0.45;
+      --card-backdrop-color-stop-to-opacity: 0.45;
+    }
+    :where(.card-picture, .p-card-header)[data-card-picture-aspect-column] {
       --card-aspect: var(--card-aspect-cols, auto);
     }
     :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=auto] {
@@ -687,6 +808,21 @@
     :where(.card-picture, .p-card-header)[data-card-picture-aspect-column=golden] {
       --card-aspect-cols: var(--aspect-golden);
     }
+    :where(.card-picture, .p-card-header)[data-card-picture-mask-column] {
+      --card-image-mask: var(--card-image-mask-column, none);
+    }
+    :where(.card-picture, .p-card-header)[data-card-picture-mask-column=linear-to-top] {
+      --card-image-mask-column: linear-gradient(to top, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+    }
+    :where(.card-picture, .p-card-header)[data-card-picture-mask-column=linear-to-right] {
+      --card-image-mask-column: linear-gradient(to right, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+    }
+    :where(.card-picture, .p-card-header)[data-card-picture-mask-column=linear-to-bottom] {
+      --card-image-mask-column: linear-gradient(to bottom, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+    }
+    :where(.card-picture, .p-card-header)[data-card-picture-mask-column=linear-to-left] {
+      --card-image-mask-column: linear-gradient(to left, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
+    }
   }
   @container (inline-size > 35ch) {
     :where(.card-picture, .p-card-header) {
@@ -696,11 +832,44 @@
       width: 100%;
     }
   }
+  :where(.card, .p-card):is([class*=card--side]):has(.card-picture, .p-card-header) {
+    --card-columns: var(--card-two-columns);
+    --card-gap: calc(var(--card-p) * 2);
+    grid-auto-flow: column;
+  }
+  :where(.card, .p-card):is([class*=card--side]):has(.card-picture:is(empty)) {
+    --card-columns: 1fr;
+  }
+  :where(.card, .p-card):is([class*=card--side]):has(.p-card-header:is(empty)) {
+    --card-columns: 1fr;
+  }
+  :where(.card, .p-card):is([class*=card--side]):has(:is(.card-picture, .p-card-header):first-child + :is(.card-body, .p-card-body)) {
+    --card-left-col: 0.6fr;
+    --card-right-col: 0.4fr;
+  }
+  :where(.card, .p-card):is([class*=card--side]):has(:is(.card-picture, .p-card-header):is([data-card-picture-aspect-column=square]):first-child + :is(.card-body, .p-card-body)) {
+    --card-left-col: 0.5fr;
+    --card-right-col: 0.5fr;
+  }
+  :where(.card, .p-card):is([class*=card--side]):has(:is(.card-body, .p-card-body):first-child + :is(.card-picture, .p-card-header)) {
+    --card-left-col: 0.4fr;
+    --card-right-col: 0.6fr;
+  }
+  :where(.card, .p-card):is([class*=card--side]):has(:is(.card-body, .p-card-body):first-child + :is(.card-picture, .p-card-header):is([data-card-picture-aspect-column=square])) {
+    --card-left-col: 0.5fr;
+    --card-right-col: 0.5fr;
+  }
   @container (inline-size > 80ch) {
     :where(.card, .p-card):not([class*=card--side]):has(.card-picture, .p-card-header) {
       --card-columns: var(--card-two-columns);
       --card-gap: calc(var(--card-p) * 2);
       grid-auto-flow: column;
+    }
+    :where(.card, .p-card):not([class*=card--side]):has(.card-picture:is(:empty)) {
+      --card-columns: 1fr;
+    }
+    :where(.card, .p-card):not([class*=card--side]):has(.p-card-header:is(:empty)) {
+      --card-columns: 1fr;
     }
     :where(.card, .p-card):not([class*=card--side]):has(:is(.card-picture, .p-card-header):first-child + :is(.card-body, .p-card-body)) {
       --card-left-col: 0.6fr;
@@ -720,6 +889,9 @@
     }
     :where(.card-picture, .p-card-header) {
       order: initial;
+    }
+    :where(.card, .p-card):is([data-card-reverse-order-column=true]) .card-picture, :where(.card, .p-card):is([data-card-reverse-order-column=true]) .p-card-header {
+      order: 2;
     }
   }
   :is(.card, .p-card).card--stacked {
@@ -767,13 +939,18 @@
   .hero--full-overlay .hero-content__image img {
     width: 100%;
   }
+  .hero--full-overlay.is-overlay .hero-content__image {
+    isolation: isolate;
+  }
   .hero--full-overlay.is-overlay .hero-content__image:before {
     content: "";
     display: block;
     width: 100%;
+    inset: 0;
     position: absolute;
     height: 100%;
-    border-image: fill 0 linear-gradient(var(--color-dark), #ccc);
+    border-image: var(--card-backdrop-fill, fill 0 linear-gradient(var(--card-backdrop-direction, in oklch to top), var(--card-backdrop-color-stop-from, oklch(from var(--card-backdrop-color-from-color, var(--color-light)) l c h/var(--card-backdrop-color-stop-from-opacity, 0.9)) 0%), var(--card-backdrop-color-stop-to, oklch(from var(--card-backdrop-color-to-color, var(--color-light)) l c h/var(--card-backdrop-color-stop-to-opacity, 0.15)) 100%)));
+    z-index: -1;
   }
   :where(.hero--full-overlay) .hero-content__text {
     text-align: center;

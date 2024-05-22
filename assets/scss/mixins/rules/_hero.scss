@@ -1,4 +1,5 @@
 @use "../../props/maps/hero" as hero;
+@use "../rules/utils/backdrop.scss" as backdrop;
 
 @mixin rules() {    
     display: grid;
@@ -48,14 +49,7 @@
 
     &.is-overlay {
         .hero-content__image {
-            &:before {
-                content: "";
-                display: block;
-                width: 100%;
-                position: absolute;
-                height: 100%;
-                border-image: fill 0 linear-gradient(var(--color-dark), #ccc);
-            }
+            @include backdrop.psuedo-card-backdrop();
         }
     }
 

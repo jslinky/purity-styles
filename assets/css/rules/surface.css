@@ -294,9 +294,9 @@
         c h
     );
   }
-  :where(.surface, .region, .quote, .card, .p-card, .hero)[data-surface-theme=accent] {
-    --color-surface-bg: var(--color-accent);
-    --color-surface-text: var(--color-accent-text);
+  :where(.surface, .region, .quote, .card, .p-card, .hero)[data-surface-theme="accent accent-light"] {
+    --color-surface-bg: var(--color-accent accent-light);
+    --color-surface-text: var(--color-accent accent-light-text);
     --color-surface-bg-interact: color-mix(
       in oklch,
       var(--color-surface-bg) 95%,
@@ -314,39 +314,7 @@
         5%
     );
   }
-  :where(.surface, .region, .quote, .card, .p-card, .hero)[data-surface-theme=accent] .btn-outline {
-    --button-color: var(--color-surface-text);
-    --button-color-hover: oklch(
-      from var(--button-color)
-        clamp(
-          var(--lightest-text),
-          calc((var(--button-color-lightness, l) - var(--threshold)) * -100),
-          var(--darkest-text)
-        )
-        c h
-    );
-  }
-  :where(.surface, .region, .quote, .card, .p-card, .hero)[data-surface-theme=accent-light] {
-    --color-surface-bg: var(--color-accent-light);
-    --color-surface-text: var(--color-accent-light-text);
-    --color-surface-bg-interact: color-mix(
-      in oklch,
-      var(--color-surface-bg) 95%,
-      oklch(
-          from var(--color-surface-text)
-            clamp(
-              calc(var(--color-surface-bg-lightness, l) + 0.025),
-              calc(
-                (var(--color-surface-bg-lightness, l) - var(--threshold)) * -100
-              ),
-              calc(var(--color-surface-bg-lightness, l) - 0.025)
-            )
-            c h
-        )
-        5%
-    );
-  }
-  :where(.surface, .region, .quote, .card, .p-card, .hero)[data-surface-theme=accent-light] .btn-outline {
+  :where(.surface, .region, .quote, .card, .p-card, .hero)[data-surface-theme="accent accent-light"] .btn-outline {
     --button-color: var(--color-surface-text);
     --button-color-hover: oklch(
       from var(--button-color)

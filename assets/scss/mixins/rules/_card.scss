@@ -25,15 +25,6 @@
     grid-auto-flow: row;
 }
 
-@mixin image-full() {
-    display: grid;
-    grid-template: 1fr / 1fr;
-    height: auto;
-    :is(.card-picture, header) {
-        height: 100%;
-    }
-}
-
 @mixin link() {
     // text-decoration: none;
     // font-size: inherit;

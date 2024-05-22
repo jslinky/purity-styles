@@ -1,0 +1,90 @@
+/// Semi transparent backdrop for cards
+$default-card-backdrop-fill: (
+  direction: in oklch to top,
+  from:
+    oklch(
+      from var(--card-backdrop-color-from-color, var(--color-light)) l c h /
+        var(--card-backdrop-color-stop-from-opacity, 0.9)
+    )
+    0%,
+  to:
+    oklch(
+      from var(--card-backdrop-color-to-color, var(--color-light)) l c h /
+        var(--card-backdrop-color-stop-to-opacity, 0.15)
+    )
+    100%,
+);
+
+@mixin card-backdrop-color($type) {
+  &[data-surface-theme="#{$type}"] {
+    --card-backdrop-color-from-color: var(--color-#{$type});
+    --card-backdrop-color-to-color: var(--color-#{$type});
+  }
+}
+
+@mixin card-backdrop-direction($layout, $direction) {
+  @if ($layout == "column" or $layout == "row") {
+    &[data-card-overlay-backdrop-direction-#{$layout}="#{$direction}"] {
+      @if ($direction == "linear-to-top") {
+        --card-backdrop-direction: in oklch to top;
+      } @else if($direction == "linear-to-bottom") {
+        --card-backdrop-direction: in oklch to bottom;
+      } @else if($direction == "linear-to-left") {
+        --card-backdrop-direction: in oklch to left;
+      } @else if($direction == "linear-to-right") {
+        --card-backdrop-direction: in oklch to right;
+      } @else if($direction == "linear-to-top-right") {
+        --card-backdrop-direction: in oklch to top right;
+      } @else if($direction == "linear-to-top-left") {
+        --card-backdrop-direction: in oklch to top left;
+      } @else if($direction == "linear-to-bottom-right") {
+        --card-backdrop-direction: in oklch to bottom right;
+      } @else if($direction == "linear-to-bottom-left") {
+        --card-backdrop-direction: in oklch to bottom left;
+      } @else if($direction == "uniform") {
+        --card-backdrop-color-stop-from-opacity: 0.45;
+        --card-backdrop-color-stop-to-opacity: 0.45;
+      } @else {
+        @error 'The argument $direction: `#{$direction}` is of incorrect type. Type of `linear-to-top`, `linear-to-bottom`, `linear-to-left`, `linear-to-right`, `linear-to-top-right`, `linear-to-top-left`, `linear-to-bottom-right`, `linear-to-bottom-left`, `uniform` is required!';
+      }
+    }
+  } @else {
+    @error 'The argument $layout: `#{$layout}` is of incorrect type. Type of `column` or `row` is required!';
+  }
+}
+
+@mixin psuedo-card-backdrop($psuedo: before) {
+  @if ($psuedo == "before" or $psuedo == "after") {
+    isolation: isolate;
+    &:#{$psuedo} {
+      content: "";
+      display: block;
+      width: 100%;
+      inset: 0;
+      position: absolute;
+      height: 100%;
+      border-image: var(
+        --card-backdrop-fill,
+        fill
+          0
+          linear-gradient(
+            var(
+              --card-backdrop-direction,
+              map-get($default-card-backdrop-fill, "direction")
+            ),
+            var(
+              --card-backdrop-color-stop-from,
+              map-get($default-card-backdrop-fill, "from")
+            ),
+            var(
+              --card-backdrop-color-stop-to,
+              map-get($default-card-backdrop-fill, "to")
+            )
+          )
+      );
+      z-index: -1;
+    }
+  } @else {
+    @error 'The argument $psuedo: `#{$psuedo}` is of incorrect type. Type of `before` or `after` is required!';
+  }
+}
