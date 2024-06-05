@@ -349,7 +349,7 @@
 }
 @layer purity.theme {
   :where(html) {
-    --max-wrapper-width: 1280px;
+    --max-wrapper-width: 1440px;
     --wrapper-padding: var(--layout-gap);
     --wrapper-padding-min: clamp(var(--layout-gap), 2vw, var(--layout-gap) * 2);
     --wrapper-inline: max(var(--wrapper-padding-min, 1rem), 50vw - var(--wrapper-width) / 2 + var(--wrapper-padding) * 2 / 2);
@@ -1243,6 +1243,7 @@
     --button-color: var(--color-grey-15);
     text-decoration: underline;
     --button-bg-hover: transparent;
+    --text-frame-x: 0;
   }
   .btn-circle {
     height: 3rem;
@@ -1598,28 +1599,44 @@
   :where(.card-picture, .p-card-header):empty {
     display: none;
   }
-  :where(.card-body, .p-card-body, .card-caption, .p-card-caption, .card-content, .p-card-content, .card-footer, .p-card-footer) > * + * {
+  :where(.card-body, .p-card-body,
+  .card-caption, .p-card-caption,
+  .card-content, .p-card-content,
+  .card-footer, .p-card-footer) > * + * {
     margin-block-start: var(--flow-space, 1em);
   }
-  :where(.card-body, .p-card-body, .card-caption, .p-card-caption, .card-content, .p-card-content, .card-footer, .p-card-footer) > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
+  :where(.card-body, .p-card-body,
+  .card-caption, .p-card-caption,
+  .card-content, .p-card-content,
+  .card-footer, .p-card-footer) > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
     --flow-space: var(--spacing-rel-6);
   }
   :where(.card-body, .p-card-body) {
     padding: var(--card-body-padding, 0);
     display: block;
   }
-  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"], [data-card-overlay-image]) {
+  :where(.card, .p-card):is([class*=bg-],
+  [data-surface-theme],
+  [class*="--color-surface-bg"],
+  [data-card-overlay-image]) {
     --card-body-padding: var(--spacing-card-component);
   }
-  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"], [data-card-overlay-image]):focus-within {
+  :where(.card, .p-card):is([class*=bg-],
+  [data-surface-theme],
+  [class*="--color-surface-bg"],
+  [data-card-overlay-image]):focus-within {
     outline: 3px solid var(--color-surface-bg-interact);
     outline-offset: -6px;
   }
-  :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]):is(.card--stacked):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-])) + :where(.card-body, .p-card-body)) :where(.card-body, .p-card-body) {
+  :where(.card, .p-card):is([class*=bg-],
+  [data-surface-theme],
+  [class*="--color-surface-bg"]):is(.card--stacked):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-])) + :where(.card-body, .p-card-body)) :where(.card-body, .p-card-body) {
     padding-block-start: 0;
   }
   @container (inline-size <= 80ch) {
-    :where(.card, .p-card):is([class*=bg-], [data-surface-theme], [class*="--color-surface-bg"]):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-]))) :where(.card-body, .p-card-body) {
+    :where(.card, .p-card):is([class*=bg-],
+    [data-surface-theme],
+    [class*="--color-surface-bg"]):has(:where(.card-picture, .p-card-header:not(.hidden, [class*=order-]))) :where(.card-body, .p-card-body) {
       padding-block-start: 0;
     }
     :where(.card, .p-card):not([class*=card--side]):has(.card-picture, .p-card-header) {
@@ -1793,14 +1810,7 @@
       --card-image-mask-column: linear-gradient(to left, var(--card-image-mask-color-from, oklch(from var(--color-dark) l c h/1) 0%), var(--card-image-mask-color-to, oklch(from var(--color-dark) l c h/0) 70%));
     }
   }
-  @container (inline-size > 35ch) {
-    :where(.card-picture, .p-card-header) {
-      order: -1;
-    }
-    :where(.card-picture, .p-card-header) img {
-      width: 100%;
-    }
-  }
+  @container (inline-size > 35ch) {}
   :where(.card, .p-card):is([class*=card--side]):has(.card-picture, .p-card-header) {
     --card-columns: var(--card-two-columns);
     --card-gap: calc(var(--card-p) * 2);
@@ -1870,6 +1880,77 @@
   }
   :where(.card-footer, .p-card-footer) {
     max-width: max-content;
+  }
+  @container (inline-size > 80ch) {
+    :where([data-slice-variation=cardRow8],
+    [data-slice-variation=cardRow9],
+    [data-slice-variation=cardRow10],
+    [data-slice-variation=cardRow11],
+    [data-slice-variation=cardRow13],
+    [data-slice-variation=cardRow14],
+    [data-slice-variation=cardRow16],
+    [data-slice-variation=cardRow17],
+    [data-slice-variation=cardRow18]) .layout-grid {
+      grid-auto-flow: dense;
+    }
+  }
+  @container (inline-size > 80ch) {
+    :where([data-slice-variation=cardRow8],
+    [data-slice-variation=cardRow10]) .layout-grid > div:nth-child(6n+2) {
+      grid-row: span 2;
+    }
+    :where([data-slice-variation=cardRow8],
+    [data-slice-variation=cardRow10]) .layout-grid > div:nth-child(6n+5) {
+      grid-column: 2/2;
+      grid-row: span 2;
+    }
+  }
+  @container (inline-size > 80ch) {
+    :where([data-slice-variation=cardRow9],
+    [data-slice-variation=cardRow11]) .layout-grid > div:nth-child(6n+1) {
+      grid-row: span 2;
+    }
+    :where([data-slice-variation=cardRow9],
+    [data-slice-variation=cardRow11]) .layout-grid > div:nth-child(6n+4) {
+      grid-column: 2/2;
+      grid-row: span 2;
+    }
+  }
+  @container (inline-size > 80ch) {
+    :where([data-slice-variation=cardRow12],
+    [data-slice-variation=cardRow14],
+    [data-slice-variation=cardRow16]) .layout-grid > div:nth-child(6n+1) {
+      grid-column: span 2;
+    }
+  }
+  @container (inline-size > 80ch) {
+    [data-slice-variation=cardRow13] .layout-grid > div:nth-child(6n+3) {
+      grid-column: span 2;
+    }
+  }
+  @container (inline-size > 80ch) {
+    [data-slice-variation=cardRow17] .layout-grid > div:nth-child(6n+1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+  @container (inline-size > 80ch) {
+    [data-slice-variation=cardRow18] .layout-grid > div:nth-child(5) {
+      grid-row: -1/span 2;
+      grid-column: -3/span 2;
+    }
+    [data-slice-variation=cardRow18] .layout-grid > div:nth-child(5n+1), [data-slice-variation=cardRow18] .layout-grid > div:nth-child(5n+2), [data-slice-variation=cardRow18] .layout-grid > div:nth-child(5n+3), [data-slice-variation=cardRow18] .layout-grid > div:nth-child(5n+4) {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    [data-slice-variation=cardRow18] .layout-grid > div:nth-child(10n+6) {
+      grid-column: 1/span 2;
+      grid-row: span 2;
+    }
+    [data-slice-variation=cardRow18] .layout-grid > div:nth-child(10n+7) {
+      grid-row: 5/span 2;
+      grid-column: -3/span 2;
+    }
   }
 }
 @layer purity.components {

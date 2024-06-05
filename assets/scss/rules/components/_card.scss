@@ -3,19 +3,33 @@
 @use "../../mixins/rules/flow" as *;
 @use "../../mixins/rules/headings" as h;
 @use "../../mixins/rules/card" as card;
-@use "../../mixins/rules/utils/backdrop" as backdrop; 
+@use "../../mixins/rules/utils/backdrop" as backdrop;
 @use "../../props/maps/colors" as colors;
-
 
 /// Card image masking variables
 $card-image-mask-color-from: oklch(from var(--color-dark) l c h / 1) 0%;
 $card-image-mask-color-to: oklch(from var(--color-dark) l c h / 0) 70%;
 
-$card-image-mask-top: linear-gradient(to top, var(--card-image-mask-color-from, #{$card-image-mask-color-from}), var(--card-image-mask-color-to, #{$card-image-mask-color-to}));
-$card-image-mask-right: linear-gradient(to right, var(--card-image-mask-color-from, #{$card-image-mask-color-from}), var(--card-image-mask-color-to, #{$card-image-mask-color-to}));
-$card-image-mask-bottom: linear-gradient(to bottom, var(--card-image-mask-color-from, #{$card-image-mask-color-from}), var(--card-image-mask-color-to, #{$card-image-mask-color-to}));
-$card-image-mask-left: linear-gradient(to left, var(--card-image-mask-color-from, #{$card-image-mask-color-from}), var(--card-image-mask-color-to, #{$card-image-mask-color-to}));
-
+$card-image-mask-top: linear-gradient(
+  to top,
+  var(--card-image-mask-color-from, #{$card-image-mask-color-from}),
+  var(--card-image-mask-color-to, #{$card-image-mask-color-to})
+);
+$card-image-mask-right: linear-gradient(
+  to right,
+  var(--card-image-mask-color-from, #{$card-image-mask-color-from}),
+  var(--card-image-mask-color-to, #{$card-image-mask-color-to})
+);
+$card-image-mask-bottom: linear-gradient(
+  to bottom,
+  var(--card-image-mask-color-from, #{$card-image-mask-color-from}),
+  var(--card-image-mask-color-to, #{$card-image-mask-color-to})
+);
+$card-image-mask-left: linear-gradient(
+  to left,
+  var(--card-image-mask-color-from, #{$card-image-mask-color-from}),
+  var(--card-image-mask-color-to, #{$card-image-mask-color-to})
+);
 
 /// Card variations
 /// Default - no padding on component or body, no bg-class or data-surface-theme
@@ -42,12 +56,12 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     &[data-card-overlay-image="true"] {
       display: grid;
       grid-template: 1fr / 1fr;
-      height: auto;     
+      height: auto;
       :is(#{$card-picture-selectors}, #{$card-body-selectors}) {
-          height: 100%;
-          grid-column: 1/1;
-          grid-row: 1/1;
-          position: relative;
+        height: 100%;
+        grid-column: 1/1;
+        grid-row: 1/1;
+        position: relative;
       }
       #{$card-body-selectors} {
         z-index: 1;
@@ -57,20 +71,27 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
         .card-title {
           container-type: normal;
         }
-
       }
     }
     &[data-card-overlay-backdrop] {
       @each $color in colors.$color-key-map {
         @include backdrop.card-backdrop-color($color);
-      }       
+      }
       #{$card-body-selectors} {
         @include backdrop.psuedo-card-backdrop();
       }
-      @each $direction in ("linear-to-top", "linear-to-right", "linear-to-bottom", "linear-to-left", "uniform") {        
-        @include backdrop.card-backdrop-direction("row", $direction);        
+      @each $direction
+        in (
+          "linear-to-top",
+          "linear-to-right",
+          "linear-to-bottom",
+          "linear-to-left",
+          "uniform"
+        )
+      {
+        @include backdrop.card-backdrop-direction("row", $direction);
       }
-    } 
+    }
     :is(.btn, button) {
       @include card.link();
     }
@@ -143,7 +164,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
     &[data-card-picture-mask-row="linear-to-bottom"] {
       --card-image-mask: #{$card-image-mask-bottom};
-    } 
+    }
     &[data-card-picture-mask-row="linear-to-left"] {
       --card-image-mask: #{$card-image-mask-left};
     }
@@ -158,7 +179,12 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
   }
 
-  :where(#{$card-body-selectors}, #{$card-caption-selectors}, #{$card-content-selectors}, #{$card-footer-selectors}) {
+  :where(
+      #{$card-body-selectors},
+      #{$card-caption-selectors},
+      #{$card-content-selectors},
+      #{$card-footer-selectors}
+    ) {
     @include flow();
   }
 
@@ -167,7 +193,12 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     display: block;
   }
 
-  :where(#{$card-component-selectors}):is([class*="bg-"], [data-surface-theme], [class*="--color-surface-bg"], [data-card-overlay-image]) {
+  :where(#{$card-component-selectors}):is(
+      [class*="bg-"],
+      [data-surface-theme],
+      [class*="--color-surface-bg"],
+      [data-card-overlay-image]
+    ) {
     --card-body-padding: var(--spacing-card-component);
     &:focus-within {
       outline: 3px solid var(--color-surface-bg-interact);
@@ -175,10 +206,15 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
   }
 
-  :where(#{$card-component-selectors}):is([class*="bg-"], [data-surface-theme], [class*="--color-surface-bg"]):is(
-      .card--stacked
-    ) {
-    &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"])) + :where(#{$card-body-selectors}))
+  :where(#{$card-component-selectors}):is(
+      [class*="bg-"],
+      [data-surface-theme],
+      [class*="--color-surface-bg"]
+    ):is(.card--stacked) {
+    &:has(
+        :where(#{$card-picture-selectors}:not(.hidden, [class*="order-"]))
+          + :where(#{$card-body-selectors})
+      )
       :where(#{$card-body-selectors}) {
       padding-block-start: 0;
       // background:red;
@@ -186,8 +222,13 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
   }
 
   @container (inline-size <= 80ch) {
-    :where(#{$card-component-selectors}):is([class*="bg-"], [data-surface-theme], [class*="--color-surface-bg"]) {
-      &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"]))) :where(#{$card-body-selectors}) {
+    :where(#{$card-component-selectors}):is(
+        [class*="bg-"],
+        [data-surface-theme],
+        [class*="--color-surface-bg"]
+      ) {
+      &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"])))
+        :where(#{$card-body-selectors}) {
         padding-block-start: 0;
         // background:red;
       }
@@ -201,12 +242,13 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
 
     //// reverse order for row
-    :where(#{$card-component-selectors}):is([data-card-reverse-order-row="true"]) {
+    :where(#{$card-component-selectors}):is(
+        [data-card-reverse-order-row="true"]
+      ) {
       #{$card-picture-selectors} {
         order: 2;
-      }      
-    }  
-
+      }
+    }
   }
 
   /// Card container queries
@@ -220,13 +262,21 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
       @include card.column-align();
       @include card.column-text-align();
       &[data-card-overlay-backdrop] {
-        @each $direction in ("linear-to-top", "linear-to-right", "linear-to-bottom", "linear-to-left", "uniform") {        
-          @include backdrop.card-backdrop-direction("column", $direction);        
+        @each $direction
+          in (
+            "linear-to-top",
+            "linear-to-right",
+            "linear-to-bottom",
+            "linear-to-left",
+            "uniform"
+          )
+        {
+          @include backdrop.card-backdrop-direction("column", $direction);
         }
-      }       
+      }
     }
     :where(#{$card-picture-selectors}) {
-      &[data-card-picture-aspect-column] {        
+      &[data-card-picture-aspect-column] {
         --card-aspect: var(--card-aspect-cols, auto);
       }
       &[data-card-picture-aspect-column="auto"] {
@@ -263,11 +313,10 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
       }
       &[data-card-picture-mask-column="linear-to-bottom"] {
         --card-image-mask-column: #{$card-image-mask-bottom};
-      } 
+      }
       &[data-card-picture-mask-column="linear-to-left"] {
         --card-image-mask-column: #{$card-image-mask-left};
-      }      
-
+      }
     }
   }
 
@@ -288,12 +337,12 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     //   }
     // }
 
-    :where(#{$card-picture-selectors}) {
-      order: -1;
-      img {
-        width: 100%;
-      }
-    }
+    // :where(#{$card-picture-selectors}) {
+    //   order: -1;
+    //   img {
+    //     width: 100%;
+    //   }
+    // }
   }
 
   @mixin card-two-column-layout() {
@@ -303,73 +352,87 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
   }
 
   /// Fixed column layout
-  :where(#{$card-component-selectors}):is([class*="card--side"]):has(#{$card-picture-selectors}) {
+  :where(#{$card-component-selectors}):is([class*="card--side"]):has(
+      #{$card-picture-selectors}
+    ) {
     @include card-two-column-layout();
   }
 
-  @for $i from 1 through length(str-explode($card-picture-selectors, ', ')) {
-    $selectors: str-explode($card-picture-selectors, ', ');
+  @for $i from 1 through length(str-explode($card-picture-selectors, ", ")) {
+    $selectors: str-explode($card-picture-selectors, ", ");
     $selector: nth($selectors, $i);
-    :where(#{$card-component-selectors}):is([class*="card--side"]):has(#{$selector}:is(empty)) {
+    :where(#{$card-component-selectors}):is([class*="card--side"]):has(
+        #{$selector}:is(empty)
+      ) {
       --card-columns: 1fr;
     }
   }
 
   :where(#{$card-component-selectors}):is([class*="card--side"]):has(
-    :is(#{$card-picture-selectors}):first-child + :is(#{$card-body-selectors})
-  ) {
-  --card-left-col: 0.6fr;
-  --card-right-col: 0.4fr;
-}
+      :is(#{$card-picture-selectors}):first-child + :is(#{$card-body-selectors})
+    ) {
+    --card-left-col: 0.6fr;
+    --card-right-col: 0.4fr;
+  }
 
-:where(#{$card-component-selectors}):is([class*="card--side"]):has(
-    :is(#{$card-picture-selectors}):is([data-card-picture-aspect-column="square"]):first-child
-      + :is(#{$card-body-selectors})
-  ) {
-  --card-left-col: 0.5fr;
-  --card-right-col: 0.5fr;
-}
+  :where(#{$card-component-selectors}):is([class*="card--side"]):has(
+      :is(#{$card-picture-selectors}):is(
+          [data-card-picture-aspect-column="square"]
+        ):first-child
+        + :is(#{$card-body-selectors})
+    ) {
+    --card-left-col: 0.5fr;
+    --card-right-col: 0.5fr;
+  }
 
-:where(#{$card-component-selectors}):is([class*="card--side"]):has(
-    :is(#{$card-body-selectors}):first-child + :is(#{$card-picture-selectors})
-  ) {
-  --card-left-col: 0.4fr;
-  --card-right-col: 0.6fr;
-  // grid-template-columns: 0.4fr 0.6fr;
-}
+  :where(#{$card-component-selectors}):is([class*="card--side"]):has(
+      :is(#{$card-body-selectors}):first-child + :is(#{$card-picture-selectors})
+    ) {
+    --card-left-col: 0.4fr;
+    --card-right-col: 0.6fr;
+    // grid-template-columns: 0.4fr 0.6fr;
+  }
 
-:where(#{$card-component-selectors}):is([class*="card--side"]):has(
-    :is(#{$card-body-selectors}):first-child
-      + :is(#{$card-picture-selectors}):is([data-card-picture-aspect-column="square"])
-  ) {
-  --card-left-col: 0.5fr;
-  --card-right-col: 0.5fr;
-}
-
+  :where(#{$card-component-selectors}):is([class*="card--side"]):has(
+      :is(#{$card-body-selectors}):first-child
+        + :is(#{$card-picture-selectors}):is(
+          [data-card-picture-aspect-column="square"]
+        )
+    ) {
+    --card-left-col: 0.5fr;
+    --card-right-col: 0.5fr;
+  }
 
   // @container grid-item (inline-size > 80ch) {
   @container (inline-size > 80ch) {
-    :where(#{$card-component-selectors}):not([class*="card--side"]):has(#{$card-picture-selectors}) {
+    :where(#{$card-component-selectors}):not([class*="card--side"]):has(
+        #{$card-picture-selectors}
+      ) {
       @include card-two-column-layout();
     }
 
-    @for $i from 1 through length(str-explode($card-picture-selectors, ', ')) {
-      $selectors: str-explode($card-picture-selectors, ', ');
+    @for $i from 1 through length(str-explode($card-picture-selectors, ", ")) {
+      $selectors: str-explode($card-picture-selectors, ", ");
       $selector: nth($selectors, $i);
-      :where(#{$card-component-selectors}):not([class*="card--side"]):has(#{$selector}:is(:empty)) {
+      :where(#{$card-component-selectors}):not([class*="card--side"]):has(
+          #{$selector}:is(:empty)
+        ) {
         --card-columns: 1fr;
       }
-    }    
+    }
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        :is(#{$card-picture-selectors}):first-child + :is(#{$card-body-selectors})
+        :is(#{$card-picture-selectors}):first-child
+          + :is(#{$card-body-selectors})
       ) {
       --card-left-col: 0.6fr;
       --card-right-col: 0.4fr;
     }
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        :is(#{$card-picture-selectors}):is([data-card-picture-aspect-column="square"]):first-child
+        :is(#{$card-picture-selectors}):is(
+            [data-card-picture-aspect-column="square"]
+          ):first-child
           + :is(#{$card-body-selectors})
       ) {
       --card-left-col: 0.5fr;
@@ -377,7 +440,8 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
-        :is(#{$card-body-selectors}):first-child + :is(#{$card-picture-selectors})
+        :is(#{$card-body-selectors}):first-child
+          + :is(#{$card-picture-selectors})
       ) {
       --card-left-col: 0.4fr;
       --card-right-col: 0.6fr;
@@ -386,7 +450,9 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
     :where(#{$card-component-selectors}):not([class*="card--side"]):has(
         :is(#{$card-body-selectors}):first-child
-          + :is(#{$card-picture-selectors}):is([data-card-picture-aspect-column="square"])
+          + :is(#{$card-picture-selectors}):is(
+            [data-card-picture-aspect-column="square"]
+          )
       ) {
       --card-left-col: 0.5fr;
       --card-right-col: 0.5fr;
@@ -397,12 +463,13 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     }
 
     //// reverse order for columns
-    :where(#{$card-component-selectors}):is([data-card-reverse-order-column="true"]) {
+    :where(#{$card-component-selectors}):is(
+        [data-card-reverse-order-column="true"]
+      ) {
       #{$card-picture-selectors} {
         order: 2;
-      }      
+      }
     }
-
   }
 
   :is(#{$card-component-selectors}) {
@@ -415,5 +482,136 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
     max-width: max-content;
   }
 
+  /// Card layout variations
+  :where(
+      [data-slice-variation="cardRow8"],
+      [data-slice-variation="cardRow9"],
+      [data-slice-variation="cardRow10"],
+      [data-slice-variation="cardRow11"],
+      [data-slice-variation="cardRow13"],
+      [data-slice-variation="cardRow14"],
+      [data-slice-variation="cardRow16"],
+      [data-slice-variation="cardRow17"],
+      [data-slice-variation="cardRow18"]
+    ) {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        grid-auto-flow: dense;
+      }
+    }
+  }
+  :where(
+      [data-slice-variation="cardRow8"],
+      [data-slice-variation="cardRow10"]
+    ) {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        > div {
+          &:nth-child(6n + 2) {
+            grid-row: span 2;
+          }
+          &:nth-child(6n + 5) {
+            grid-column: 2/2;
+            grid-row: span 2;
+          }
+        }
+      }
+    }
+  }
 
+  :where(
+      [data-slice-variation="cardRow9"],
+      [data-slice-variation="cardRow11"]
+    ) {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        > div {
+          &:nth-child(6n + 1) {
+            grid-row: span 2;
+          }
+          &:nth-child(6n + 4) {
+            grid-column: 2/2;
+            grid-row: span 2;
+          }
+        }
+      }
+    }
+  }
+
+  :where(
+      [data-slice-variation="cardRow12"],
+      [data-slice-variation="cardRow14"],
+      [data-slice-variation="cardRow16"]
+    ) {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        > div {
+          &:nth-child(6n + 1) {
+            grid-column: span 2;
+          }
+        }
+      }
+    }
+  }
+
+  [data-slice-variation="cardRow13"] {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        > div {
+          &:nth-child(6n + 3) {
+            grid-column: span 2;
+          }
+        }
+      }
+    }
+  }
+
+  [data-slice-variation="cardRow17"] {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        > div {
+          &:nth-child(6n + 1) {
+            grid-column: span 2;
+            grid-row: span 2;
+          }
+        }
+      }
+    }
+  }
+
+  [data-slice-variation="cardRow18"] {
+    @container (inline-size > 80ch) {
+      // make mixin for this
+      .layout-grid {
+        > div {
+          &:nth-child(5) {
+            grid-row: -1 / span 2;
+            grid-column: -3 / span 2;
+          }
+
+          &:nth-child(5n + 1),
+          &:nth-child(5n + 2),
+          &:nth-child(5n + 3),
+          &:nth-child(5n + 4) {
+            grid-column: auto;
+            grid-row: auto;
+          }
+          &:nth-child(10n + 6) {
+            grid-column: 1 / span 2;
+            grid-row: span 2;
+          }
+          &:nth-child(10n + 7) {
+            grid-row: 5 / span 2;
+            grid-column: -3 / span 2;
+          }
+        }
+      }
+    }
+  }
 }

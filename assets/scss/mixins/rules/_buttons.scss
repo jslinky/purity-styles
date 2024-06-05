@@ -74,6 +74,7 @@
     @include button-color-variant($bg: 'transparent', $color: 'var(--color-grey-15)');
     text-decoration: underline;
     --button-bg-hover: transparent;
+    --text-frame-x: 0;
 }
 
 @mixin neutral() {
