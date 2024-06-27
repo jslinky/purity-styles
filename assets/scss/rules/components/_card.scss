@@ -108,7 +108,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 
       &:has(#{$card-picture-selectors}) {
         grid-auto-flow: row;
-        grid-auto-rows: max-content;
+        grid-auto-rows: auto;
         // grid-template-columns: 1fr;
       }
     }
@@ -226,17 +226,28 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
         [class*="bg-"],
         [data-surface-theme],
         [class*="--color-surface-bg"]
-      ) {
-      &:has(:where(#{$card-picture-selectors}:not(.hidden, [class*="order-"])))
+      ):not(:is(.card--side, [data-card-reverse-order-row="true"])) {
+      // &:has(
+      //   :where(#{$card-picture-selectors}:not(.hidden, [class*="order-"]), 
+      //     :is(#{$card-picture-selectors}) + :is(#{$card-body-selectors}))
+      //   )
+      //   :where(#{$card-body-selectors}) {
+      //   padding-block-start: 0;
+      // }
+      &:has(
+          :where(:is(#{$card-picture-selectors}:not(.hidden, [class*="order-"])):not(:empty) + :is(#{$card-body-selectors}))
+        )
         :where(#{$card-body-selectors}) {
         padding-block-start: 0;
         // background:red;
       }
+
+
     }
     :where(#{$card-component-selectors}) {
       &:not([class*="card--side"]) {
         &:has(#{$card-picture-selectors}) {
-          grid-auto-rows: max-content;
+          grid-auto-rows: auto;
         }
       }
     }
@@ -352,10 +363,20 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
   }
 
   /// Fixed column layout
-  :where(#{$card-component-selectors}):is([class*="card--side"]):has(
-      #{$card-picture-selectors}
-    ) {
-    @include card-two-column-layout();
+  :where(#{$card-component-selectors}):is([class*="card--side"]) {
+    &:has(#{$card-picture-selectors}) {
+      @include card-two-column-layout();
+    }    
+    &:is([data-card-reverse-order-column="true"]) {
+      .card-body {
+          padding-inline-end: 0;
+      }
+    }
+    &:not([data-card-reverse-order-column="true"]) {
+      .card-body {
+          padding-inline-start: 0;   
+      }
+    }     
   }
 
   @for $i from 1 through length(str-explode($card-picture-selectors, ", ")) {
@@ -470,6 +491,21 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
         order: 2;
       }
     }
+
+    :where(#{$card-component-selectors}) {
+      &:has([data-card-reverse-order-column="true"], :is(#{$card-picture-selectors}) + :is(#{$card-body-selectors})) {
+        :where(#{$card-body-selectors}) {
+            padding-inline-start:0;
+        }            
+    }
+    &:has(:is(#{$card-body-selectors}) + :is(#{$card-picture-selectors})) {
+        :where(#{$card-body-selectors}) {
+            padding-inline-end:0;
+        }
+    }      
+    }
+
+
   }
 
   :is(#{$card-component-selectors}) {
