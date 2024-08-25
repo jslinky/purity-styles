@@ -9,7 +9,7 @@
       @include output-props(
         custom,
         "#{$key}",
-        pick-keys($val, font-size fs-min fs-fluid)...
+        pick-keys($val, font-size fs-min fs-fluid line-height)...
       );
     }
 

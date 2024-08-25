@@ -2,27 +2,35 @@
   :where(html) {
     --heading-base-font-size: 1rem;
     --heading-base-fs-min: 1rem;
+    --heading-base-line-height: calc(var(--line-height-relative, 1em) + var(--line-height-fixed, var(--spacing-xs, 0.5rem)));
     --heading-2xl-font-size: var(--text-display-2xl);
     --heading-2xl-fs-min: var(--text-display-xl);
     --heading-2xl-fs-fluid: 1.5cqi;
+    --heading-2xl-line-height: 1;
     --heading-xl-font-size: var(--text-display-xl);
     --heading-xl-fs-min: var(--text-display-lg);
     --heading-xl-fs-fluid: 1.5cqi;
+    --heading-xl-line-height: 1;
     --heading-lg-font-size: var(--text-display-lg);
     --heading-lg-fs-min: var(--text-display-md);
     --heading-lg-fs-fluid: 1.5cqi;
+    --heading-lg-line-height: 1.25;
     --heading-md-font-size: var(--text-display-md);
     --heading-md-fs-min: var(--text-display-sm);
     --heading-md-fs-fluid: 1cqi;
+    --heading-md-line-height: inherit;
     --heading-sm-font-size: var(--text-display-sm);
     --heading-sm-fs-min: var(--text-display-xs);
     --heading-sm-fs-fluid: 1cqi;
+    --heading-sm-line-height: inherit;
     --heading-xs-font-size: var(--text-display-xs);
     --heading-xs-fs-min: var(--text-display-xs);
     --heading-xs-fs-fluid: 1cqi;
+    --heading-xs-line-height: inherit;
     --heading-xxs-font-size: var(--text-xl);
     --heading-xxs-fs-min: var(--text-xl);
     --heading-xxs-fs-fluid: 1cqi;
+    --heading-xxs-line-height: inherit;
     --heading-font-family: var(--font-family-display, inherit);
   }
 }

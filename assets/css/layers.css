@@ -1,4 +1,4 @@
-@layer purity-tw, purity, purity-util, site;
+@layer purity-tw, purity, site, purity-util;
 @layer purity-tw {
   @layer preflight, theme;
 }

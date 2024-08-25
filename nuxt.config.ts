@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       cssCodeSplit: false
     }
   },  
-  modules: ['nuxt-icon', '@vueuse/nuxt', "@nuxt/fonts", "nuxt-primevue"],
+  modules: ['@vueuse/nuxt', "@nuxt/fonts", "nuxt-primevue"],
   primevue: {
     // cssLayerOrder: 'base, components, primevue, utilities',
     components: {

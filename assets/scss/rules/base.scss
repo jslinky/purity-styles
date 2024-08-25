@@ -1,7 +1,7 @@
 @mixin output-base-rules() {
   body {
     font-family: var(--font-family-base);
-    font-size: var(--text-size-base);
+    font-size: var(--font-size-base);
     line-height: calc(
       var(--line-height-relative, 1em) +
         var(--line-height-fixed, var(--spacing-xs, 0.5rem))

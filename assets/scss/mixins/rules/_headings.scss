@@ -1,19 +1,74 @@
+
 @use "../ultilities/output-props" as *;
 @use "../ultilities/exclude-keys" as *;
 @use "../ultilities/pick-keys" as *;
 @use "../../props/maps/headings" as headings;
 
-@mixin fluid-heading-font-size() {
-    --heading-font-size: min(var(--fs), calc(var(--fs-min) + var(--fs-fluid, 3vw)));  
+/**
+ * Description: [Add a brief description of the code here]
+ * 
+    * @param {string} $type - The type of fluid heading font size. Possible values are "container" or "viewport".
+ */
+
+
+$fluid-font-size-tuple: '2xl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs';
+
+@mixin fluid-heading-font-size($size: '', $type: 'container') {  
+
+    $check-heading-size: index(map-keys(module-variables("headings"...)), heading-#{$size});
+    
+    @if $type == "viewport" and if($check-heading-size, true, false) == true {
+        // https://dev.to/ixkaito/fluid-typography-using-css-custom-properties-css-variables-3lcn
+        /// Using px values for viewport fluid font size
+        $heading-size: map-get(module-variables("headings"...) , 'heading-#{$size}' );        
+        $min-font-size: map-get($heading-size, "fs-min");
+        $min-font-size-px: str-slice($min-font-size, 12, -2);        
+        $min-font-size-px-prop: unquote('var(--#{$min-font-size-px}-px)');
+        --min-font-size: #{$min-font-size-px-prop};        
+        $max-font-size: map-get($heading-size, "font-size");
+        $max-font-size-px: str-slice($max-font-size, 12, -2);        
+        $max-font-size-px-prop: unquote('var(--#{$max-font-size-px}-px)');        
+        --max-font-size: #{$max-font-size-px-prop};
+        // Default viewport from and to values live on base
+        @include output-props(custom, pick-keys(headings.$heading-base, viewport-from viewport-to)...);          
+
+        --viewport-unit-converter: 1vw;
+        --fz-from: var(--font-size-from, var(--min-font-size));
+        --fz-to: var(--font-size-to, var(--max-font-size));
+        --fz-slope: (var(--fz-to) - var(--fz-from)) / (var(--viewport-to) - var(--viewport-from)) * 100;
+        --fz-intercept: (var(--viewport-to) * var(--fz-from) - var(--viewport-from) * var(--fz-to)) / (var(--viewport-to) - var(--viewport-from));
+        --font-size: calc(var(--fz-slope) * var(--viewport-unit-converter) + var(--fz-intercept) * 1px);
+      
+        --min-fz-px: calc(var(--min-font-size) * 1px);
+        --max-fz-px: calc(var(--max-font-size) * 1px);
+        --clamp: clamp(var(--min-fz-px), var(--font-size), var(--max-fz-px));
+        --max: var(--has-max, var(--min));
+        --min: var(--has-min, var(--font-size));
+        --has-max: min(var(--max-fz-px), var(--font-size));
+        --has-min: max(var(--min-fz-px), var(--font-size));
+      
+        --heading-font-size: var(--clamp, var(--max));  
+    } @else if $type == "viewport" and $size == '' {
+        @warn "You must provide a size when using viewport fluid font size.";
+    } @else {
+        --heading-font-size: min(var(--fs), calc(var(--fs-min) + var(--fs-fluid, 3vw)));
+    }
+    
+  
 }
 
 @mixin heading-font-size($size) {
     --heading-font-size: var(--heading-#{$size}-font-size);
 }
 
+@mixin heading-line-height($size) {
+    --heading-line-height: var(--heading-#{$size}-line-height);
+}
+
 @mixin base-props() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-base, font-family font-size fs-min fs-max fs-fluid is-fluid)...);
-    @include output-props(custom, pick-keys(headings.$heading-base, fs-max)...);          
+    @include output-props(custom, heading, exclude-keys(headings.$heading-base, font-family font-size fs-min fs-fluid is-fluid line-height viewport-from viewport-to)...);
+    // Uncheck this if fs-max, viewport-from, viewport-to are not showing in output
+    // @include output-props(custom, pick-keys(headings.$heading-base, fs-max)...);          
 }
 
 @mixin base() {
@@ -33,6 +88,19 @@
     @content;
 } 
 
+@mixin base-subtitle() {
+    font-size: var(--subtitle-font-size, inherit);
+    color: var(--subtitle-color, var(--color-global-text));
+    font-family: var(--subtitle-font-family, inherit);
+    line-height: var(--subtitle-line-height, inherit);
+    text-wrap: balance;
+    letter-spacing: var(--subtitle-letter-spacing, normal);
+}
+
+@mixin heading-xxs-fluid-viewport() {
+    @include fluid-heading-font-size("xxs", "viewport");
+}
+
 // Used in Tailwind utilities layer
 @mixin heading-xxs-fluid() {
     --fs-min: var(--heading-xxs-fs-min);
@@ -40,12 +108,16 @@
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-xxs-fs-fluid); // define using container queries
     }          
+    &.fluid-viewport {
+        @include heading-xxs-fluid-viewport();
+    }    
 }
 
 @mixin heading-xxs() {
     // obmitting font-size as outputting on root. Defined in tailwind also
-    @include output-props(custom, heading, exclude-keys(headings.$heading-xxs, font-size fs-min fs-fluid is-fluid)...);    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-xxs, font-size fs-min fs-fluid is-fluid line-height)...);    
     @include heading-xxs-fluid();
+    @include heading-line-height(xxs);
     @if map-get(headings.$heading-xxs, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {
@@ -54,19 +126,27 @@
     @content;    
 }
 
+@mixin heading-xs-fluid-viewport() {
+    @include fluid-heading-font-size("xs", "viewport");
+}
+
 // Used in Tailwind utilities layer
 @mixin heading-xs-fluid() {
     --fs-min: var(--heading-xs-fs-min);
     --fs: var(--heading-xs-font-size);
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-xs-fs-fluid); // define using container queries
-    }          
+    }         
+    &.fluid-viewport {
+        @include heading-xs-fluid-viewport();
+    }     
 }
 
 @mixin heading-xs() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-xs, font-size fs-min fs-fluid is-fluid)...);    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-xs, font-size fs-min fs-fluid is-fluid line-height)...);    
     // --heading-font-size: var(--heading-xs-font-size);
-    @include heading-xs-fluid();    
+    @include heading-xs-fluid();  
+    @include heading-line-height(xs);  
     @if map-get(headings.$heading-xs, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {
@@ -75,24 +155,36 @@
     @content;    
 }
 
+@mixin heading-sm-fluid-viewport() {
+    @include fluid-heading-font-size("sm", "viewport");
+}
+
 // Used in Tailwind utilities layer
 @mixin heading-sm-fluid() {
     --fs-min: var(--heading-sm-fs-min);
     --fs: var(--heading-sm-font-size);
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-sm-fs-fluid); // define using container queries
-    }          
+    } 
+    &.fluid-viewport {
+        @include heading-sm-fluid-viewport();
+    }             
 }
 
 @mixin heading-sm() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-sm, font-size fs-min fs-fluid is-fluid)...);    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-sm, font-size fs-min fs-fluid is-fluid line-height)...);    
     @include heading-sm-fluid();
+    @include heading-line-height(sm);
     @if map-get(headings.$heading-sm, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {
         @include heading-font-size(sm);
     }           
     @content;    
+}
+
+@mixin heading-md-fluid-viewport() {
+    @include fluid-heading-font-size("md", "viewport");
 }
 
 // Used in Tailwind utilities layer
@@ -102,17 +194,25 @@
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-md-fs-fluid); // define using container queries
     }          
+    &.fluid-viewport {
+        @include heading-md-fluid-viewport();
+    }    
 }
 
 @mixin heading-md() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-md, font-size fs-min fs-fluid is-fluid)...);    
-    @include heading-md-fluid();    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-md, font-size fs-min fs-fluid is-fluid line-height)...);    
+    @include heading-md-fluid();  
+    @include heading-line-height(md);  
     @if map-get(headings.$heading-md, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {
         @include heading-font-size(md);
     }        
     @content;    
+}
+
+@mixin heading-lg-fluid-viewport() {
+    @include fluid-heading-font-size("lg", "viewport");
 }
 
 // Used in Tailwind utilities layer
@@ -122,17 +222,25 @@
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-lg-fs-fluid); // define using container queries
     }          
+    &.fluid-viewport {
+        @include heading-lg-fluid-viewport();
+    }    
 }
 
 @mixin heading-lg() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-lg, font-size fs-min fs-fluid is-fluid)...);    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-lg, font-size fs-min fs-fluid is-fluid line-height)...);    
     @include heading-lg-fluid();
+    @include heading-line-height(lg);
     @if map-get(headings.$heading-lg, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {
         @include heading-font-size(lg);
     }        
     @content;    
+}
+
+@mixin heading-xl-fluid-viewport() {
+    @include fluid-heading-font-size("xl", "viewport");
 }
 
 // Used in Tailwind utilities layer
@@ -142,17 +250,25 @@
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-xl-fs-fluid); // define using container queries
     }          
+    &.fluid-viewport {
+        @include heading-xl-fluid-viewport();
+    }    
 }
 
 @mixin heading-xl() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-xl, font-size fs-min fs-fluid is-fluid)...);    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-xl, font-size fs-min fs-fluid is-fluid line-height)...);    
     @include heading-xl-fluid();
+    @include heading-line-height(xl);
     @if map-get(headings.$heading-xl, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {
         @include heading-font-size(xl);
     }         
     @content;    
+}
+
+@mixin heading-2xl-fluid-viewport() {
+    @include fluid-heading-font-size("2xl", "viewport");
 }
 
 // Used in Tailwind utilities layer
@@ -162,11 +278,15 @@
     @supports (font-size: unquote('1cqi')) {
         --fs-fluid: var(--heading-2xl-fs-fluid); // define using container queries
     }          
+    &.fluid-viewport {
+        @include heading-2xl-fluid-viewport();
+    }    
 }
 
 @mixin heading-2xl() {
-    @include output-props(custom, heading, exclude-keys(headings.$heading-2xl, font-size fs-min fs-fluid is-fluid)...);    
+    @include output-props(custom, heading, exclude-keys(headings.$heading-2xl, font-size fs-min fs-fluid is-fluid line-height)...);    
     @include heading-2xl-fluid();
+    @include heading-line-height(2xl);
     @if map-get(headings.$heading-2xl, "is-fluid") {
         @include fluid-heading-font-size();
     } @else {

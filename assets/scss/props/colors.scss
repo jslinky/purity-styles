@@ -5,6 +5,9 @@ $theme-colors: map-collect(
   props.$color-primary-lch,
   props.$color-secondary-lch,
   props.$color-accent-lch,
+  props.$color-success-lch,
+  props.$color-warning-lch,
+  props.$color-danger-lch,
   props.$default-color-light-range,
   props.$default-color-chroma-range
 );

@@ -3,7 +3,7 @@
 @use "../ultilities/pick-keys" as *;
 
 @mixin default() {
-    @include output-props(custom, pick-keys(module-variables("wrapper"), wrapper-inline)...);
+    @include output-props(custom, pick-keys(module-variables("wrapper"), wrapper-inline wrapper-padding-min wrapper-inline wrapper-width)...);
     padding-inline: var(--wrapper-inline);
 }
 

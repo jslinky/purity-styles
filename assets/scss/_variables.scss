@@ -1,0 +1,10 @@
+@use "./mixins/ultilities/deep-map-set" as *;
+@use "./props/maps/headings" as *;
+
+$menu-cq-min-size: 10ch!default;
+$menu-cq-max-size: 90ch!default;
+
+$enable-animations: true!default;
+
+$heading-lg: map-deep-set($heading-lg, "line-height", 1)!default;
+$heading-md: map-deep-set($heading-md, "line-height", 1)!default;

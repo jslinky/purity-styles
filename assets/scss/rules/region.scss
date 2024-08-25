@@ -1,5 +1,5 @@
 @layer purity-util {
-  .region {
-    padding-block: var(--spacing-regions);
+  .region + .region {
+    padding-block-start: var(--spacing-regions);
   }
 }

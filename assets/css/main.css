@@ -50,8 +50,10 @@
 /* .primary-l {
 } */
 
-* :has(> .heading, > h1, > h2, > h3, > h4, > h5, > h6) {
-  container-type:normal;
+@layer purity.base {
+  * :has(> .heading, > h1, > h2, > h3, > h4, > h5, > h6) {
+    container-type:normal;
+  }
 }
 
 /* @layer base {

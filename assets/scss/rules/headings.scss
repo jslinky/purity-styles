@@ -44,6 +44,12 @@
         font-size: var(--heading-font-size);
     }
 
+    .heading-xs-fluid {
+        @include heading-xs-fluid();
+        @include fluid-heading-font-size();
+        font-size: var(--heading-font-size);
+    }     
+
     .heading-sm-fluid {
         @include heading-sm-fluid();
         @include fluid-heading-font-size();

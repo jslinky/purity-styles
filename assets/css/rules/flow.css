@@ -1,8 +1,8 @@
 @layer purity-util {
   .flow > * + * {
-    margin-block-start: var(--flow-space, 1em);
+    margin-block-start: var(--flow-space, max(1rem, 0.275em));
   }
   .flow > * + *:where(button:only-of-type, .btn:only-of-type, :has(> button, > .btn)) {
-    --flow-space: var(--spacing-rel-6);
+    --flow-space: var(--spacing-rel-4);
   }
 }

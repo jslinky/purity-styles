@@ -1,0 +1,77 @@
+@use "../../../variables" as variables;
+
+
+@mixin mobile-menu-styles-layout() {
+  height: 100dvh;
+  width: 100vw;
+  margin-inline: calc(-50vw + 50%);
+  top: 0;
+  display: grid;
+  place-content: center;
+}
+
+@mixin mobile-menu-styles-color() {
+  background: var(--nav-menu-bg, var(--nav-menu-hide-bg, var(--color-accent)));
+}
+
+@mixin menu-styles-color() {
+  --nav-menu-bg: var(--nav-menu-show-bg, transparent);
+}
+
+@mixin menu-styles-layout() {
+  position: relative;
+  display: flex;
+}
+
+@mixin menu-cq-rules(
+  $min-size: #{variables.$menu-cq-min-size},
+  $max-size: #{variables.$menu-cq-max-size}
+) {
+  @container navigation (inline-size >= #{$min-size}) {
+    .navigation__brand span {
+      height: auto;
+      overflow: unset;
+      position: unset;
+      clip-path: unset;
+      line-height: unset;
+    }
+  }
+
+  @container navigation (inline-size >= #{$max-size}) {
+    // @container menu (inline-size >= 60ch) {
+
+    .navigation__menu button {
+      display: none;
+    }
+
+    .navigation__menu__menu {
+      @include menu-styles-layout();
+      @include menu-styles-color();
+    }
+  }
+
+  @container navigation (#{$min-size} <= inline-size <= #{$max-size}) {
+    // @container menu (40ch <= inline-size <= 60ch) {
+
+    // @container not style(--show-menu: true) {
+    .navigation:not([data-show-menu]) {
+      .btn:where([aria-expanded="false"]) + .navigation__menu__menu {
+        display: none;
+        animation: var(--menu-hide, menu-hide-from-left) 500ms ease-in forwards;
+      }
+
+      .btn:where([aria-expanded="true"]) + .navigation__menu__menu {
+        animation: var(--menu-show, menu-show-from-left) 500ms ease-in forwards;
+      }
+
+      .navigation__menu {
+        display: contents;
+      }
+
+      .navigation__menu__menu {
+        @include mobile-menu-styles-layout();
+        @include mobile-menu-styles-color();
+      }
+    }
+  }
+}

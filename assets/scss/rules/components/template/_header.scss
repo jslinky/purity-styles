@@ -1,6 +1,6 @@
 @use "../../../props/maps/z-index" as z-index;
 
-$main-header-selector: main-header;
+$main-header-selector: main-header!default;
 
 @mixin output-main-header-rules() {
 

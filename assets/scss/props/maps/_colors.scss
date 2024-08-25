@@ -21,6 +21,24 @@ $color-accent-lch: (
   "accent-h": calc(var(--primary-h) + 240),
 );
 
+$color-success-lch: (
+  "success-l": var(--color-8-l),
+  "success-c": var(--color-8-c),
+  "success-h": var(--op-hue-green),
+);
+
+$color-warning-lch: (
+  "warning-l": var(--color-8-l),
+  "warning-c": var(--color-8-c),
+  "warning-h": var(--op-hue-yellow),
+);
+
+$color-danger-lch: (
+  "danger-l": var(--color-8-l),
+  "danger-c": var(--color-8-c),
+  "danger-h": var(--op-hue-red),
+);
+
 $default-color-light-range: (
   "color-0-l": 99%,
   "color-1-l": 95%,

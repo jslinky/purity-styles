@@ -50,9 +50,6 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
 @layer purity.components {
   :where(#{$card-component-selectors}) {
     @include card.default-rules();
-    @include card.row-justify();
-    @include card.row-align();
-    @include card.row-text-align();
     &[data-card-overlay-image="true"] {
       display: grid;
       grid-template: 1fr / 1fr;
@@ -112,6 +109,9 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
         // grid-template-columns: 1fr;
       }
     }
+    @include card.row-justify();
+    @include card.row-align();
+    @include card.row-text-align();
   }
 
   :where(#{$card-title-selectors}) {
@@ -121,8 +121,9 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
   }
 
   :where(#{$card-subtitle-selectors}) {
-    @include h.base();
-    --flow-space: var(--spacing-rel-6);
+    // @include h.base();
+    @include h.base-subtitle();
+    --flow-space: var(--spacing-rel-4);
     display: block;
   }
 
@@ -372,7 +373,7 @@ $card-footer-selectors: ".card-footer, .p-card-footer";
           padding-inline-end: 0;
       }
     }
-    &:not([data-card-reverse-order-column="true"]) {
+    &:not([data-card-reverse-order-column="true"], :has(:where(#{$card-body-selectors}) + :where(#{$card-picture-selectors}))) {
       .card-body {
           padding-inline-start: 0;   
       }
